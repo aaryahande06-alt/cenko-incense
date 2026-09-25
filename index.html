@@ -1231,7 +1231,83 @@ addEventListener('keydown',e=>{
   if(body.classList.contains('bag-open')){ closeBag(); return; }
   if(sheetId) closeSheet();
 });
-$('#checkout').addEventListener('click',()=>toast(bag.size?'Checkout opens once a payment provider is connected':'Add something to your bag first'));
+/* ============ Shopify checkout ============ */
+const SHOPIFY={
+  domain:'vqzmbg-ef.myshopify.com',
+  apiVersion:'2026-07',
+  country:'IN',
+  handles:{
+    exotica:'exotica', nature:'nature', tranquility:'tranquility', rejuvenation:'rejuvenation',
+    spice:'the-spice-rack', coffee:'the-coffee-rack', taj:'the-taj-mahal', ghats:'ghats-of-varanasi',
+    jasmine:'jasmine-100', patchouli:'patchouli-100', lemongrass:'lemongrass-100', citronella:'citronella-100'
+  }
+};
+const shopifyEndpoint=`https://${SHOPIFY.domain}/api/${SHOPIFY.apiVersion}/graphql.json`;
+async function shopifyRequest(query,variables={}){
+  const r=await fetch(shopifyEndpoint,{
+    method:'POST',
+    mode:'cors',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({query,variables})
+  });
+  const raw=await r.text();
+  let json=null;
+  try{ json=raw?JSON.parse(raw):null; }catch(_e){}
+  if(!r.ok){
+    let detail='';
+    if(json?.errors){
+      if(Array.isArray(json.errors)) detail=json.errors.map(e=>e?.message||String(e)).join(' · ');
+      else if(typeof json.errors==='object') detail=Object.entries(json.errors).map(([k,v])=>`${k}: ${Array.isArray(v)?v.join(', '):v}`).join(' · ');
+      else detail=String(json.errors);
+    } else if(raw) detail=raw.slice(0,240);
+    throw new Error(`Shopify ${r.status}${detail?': '+detail:''}`);
+  }
+  if(Array.isArray(json?.errors)&&json.errors.length) throw new Error(json.errors.map(e=>e.message||String(e)).join(' · '));
+  return json?.data;
+}
+async function resolveShopifyVariants(){
+  const q=`query CENKOProducts @inContext(country: ${SHOPIFY.country}) {
+    products(first: 50) {
+      nodes { handle title selectedOrFirstAvailableVariant { id availableForSale } }
+    }
+  }`;
+  const data=await shopifyRequest(q);
+  const byHandle=new Map((data?.products?.nodes||[]).map(p=>[p.handle,p]));
+  const lines=[];
+  for(const [id,quantity] of bag){
+    const handle=SHOPIFY.handles[id];
+    const p=byHandle.get(handle), v=p?.selectedOrFirstAvailableVariant;
+    if(!p||!v) throw new Error(`Could not find ${CATALOG.find(x=>x.id===id)?.name||id} in Shopify.`);
+    if(!v.availableForSale) throw new Error(`${p.title} is not currently available for checkout.`);
+    lines.push({merchandiseId:v.id,quantity});
+  }
+  return lines;
+}
+async function beginShopifyCheckout(){
+  if(!bag.size){ toast('Add something to your bag first'); return; }
+  const btn=$('#checkout'), label=btn.querySelector('span'), original=label?.textContent||'Checkout';
+  btn.disabled=true; if(label) label.textContent='Preparing checkout…';
+  try{
+    const lines=await resolveShopifyVariants();
+    const mutation=`mutation CENKOCheckout($input: CartInput!) @inContext(country: ${SHOPIFY.country}) {
+      cartCreate(input: $input) {
+        cart { id checkoutUrl }
+        userErrors { field message }
+        warnings { message }
+      }
+    }`;
+    const data=await shopifyRequest(mutation,{input:{lines,buyerIdentity:{countryCode:SHOPIFY.country}}});
+    const result=data?.cartCreate;
+    if(result?.userErrors?.length) throw new Error(result.userErrors.map(e=>e.message).join(' · '));
+    if(!result?.cart?.checkoutUrl) throw new Error('Shopify did not return a checkout URL.');
+    window.location.assign(result.cart.checkoutUrl);
+  }catch(err){
+    console.error('CENKO Shopify checkout error:',err);
+    toast(err?.message||'Checkout could not start. Please try again.');
+    btn.disabled=false; if(label) label.textContent=original;
+  }
+}
+$('#checkout').addEventListener('click',beginShopifyCheckout);
 renderBag();
 
 /* ============ newsletter ============ */
