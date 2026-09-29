@@ -1331,7 +1331,7 @@ function legalHTML(p){
     ['Common name',name],
     ['Net quantity',n?`${n} sticks`:'—'],
     ['MRP',`${fmt(p.mrp||p.price)} (inclusive of all taxes)`],
-    ['You pay',`${fmt(p.price)}${n?` · unit sale price ${fmt(Math.round(p.price/n*100)/100)} per stick`:''}`],
+    ['You pay',fmt(p.price)],
     ['Country of origin',SELLER.origin],
     ['Marketed by',`${esc(SELLER.legalName)}, ${esc(SELLER.address)}`]
   ];
