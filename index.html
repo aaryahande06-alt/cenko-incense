@@ -868,7 +868,8 @@ const SHOPIFY={
     clientId:'a0cefbbf-0ff3-43cf-9f08-8534c91fadd5',
     shopId:'85572813021',
     apiVersion:'2026-07',
-    redirect:'https://www.cenko.in/'
+    redirect:'https://www.cenko.in/',
+    memberCode:'CENKO-MEMBER' /* Shopify discount code (10% off) that the site applies to a signed-in member's cart */
   }
 };
 
@@ -1807,8 +1808,9 @@ async function accCallback(){
   renderAccountBits(); if(sheetId==='account') openAccount();
   return true;
 }
-function accLogout(){
-  const s=Account.session; accForget(); setCartIdentity(null);
+async function accLogout(){
+  const s=Account.session; accForget();
+  await Promise.race([setCartIdentity(null).catch(()=>{}), new Promise(r=>setTimeout(r,2500))]); /* take member pricing off the cart first */
   const q=new URLSearchParams({post_logout_redirect_uri:ACC.redirect}); if(s&&s.idToken) q.set('id_token_hint',s.idToken);
   location.href=`${ACC_AUTH}/logout?${q}`;
 }
@@ -1819,6 +1821,11 @@ async function setCartIdentity(token){
   try{ await cartCall(`mutation B($id:ID!,$bi:CartBuyerIdentityInput!,$country:CountryCode) @inContext(country:$country){cartBuyerIdentityUpdate(cartId:$id,buyerIdentity:$bi){cart{...C} userErrors{message}}}`+CART_F,{id:cart.id,bi},'cartBuyerIdentityUpdate'); }
   catch(e){ console.warn('[CENKO] could not link cart to member',e);
     if(token&&Account.me&&Account.me.email){ try{ await cartCall(`mutation B($id:ID!,$bi:CartBuyerIdentityInput!,$country:CountryCode) @inContext(country:$country){cartBuyerIdentityUpdate(cartId:$id,buyerIdentity:$bi){cart{...C} userErrors{message}}}`+CART_F,{id:cart.id,bi:{countryCode:SHOPIFY.country,email:Account.me.email}},'cartBuyerIdentityUpdate'); }catch(_){} } }
+  /* member pricing: apply the member code while signed in, remove it on sign-out */
+  if(ACC.memberCode){
+    try{ await cartCall(`mutation D($id:ID!,$codes:[String!]!,$country:CountryCode) @inContext(country:$country){cartDiscountCodesUpdate(cartId:$id,discountCodes:$codes){cart{...C} userErrors{message}}}`+CART_F,{id:cart.id,codes:token?[ACC.memberCode]:[]},'cartDiscountCodesUpdate'); }
+    catch(e){ console.warn('[CENKO] member code',e); }
+  }
 }
 function linkCartToMember(){ if(signedIn()&&SHOP_ON) run(async()=>{ const t=await accessToken(); if(t) await setCartIdentity(t); }); }
 async function subscribeMember(){
