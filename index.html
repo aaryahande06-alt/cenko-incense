@@ -591,8 +591,8 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
 <div class="cursor" aria-hidden="true"><div class="cursor__ring"></div><div class="cursor__dot"></div><div class="cursor__label"></div></div>
 
 <div class="promo" role="region" aria-label="Store notice">
-  <p class="sr">Pre-orders only: every order is a pre-order and dispatches in 2 to 3 weeks. Free shipping over ₹1,000. Registered members save 10%.</p>
-  <div class="promo__track" aria-hidden="true"><span class="promo__run">Pre-orders only <i>&#9670;</i> Every order dispatches in 2–3 weeks <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> Pre-orders only <i>&#9670;</i> Every order dispatches in 2–3 weeks <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> </span><span class="promo__run">Pre-orders only <i>&#9670;</i> Every order dispatches in 2–3 weeks <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> Pre-orders only <i>&#9670;</i> Every order dispatches in 2–3 weeks <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> </span></div>
+  <p class="sr">Pre-orders only: every order is a pre-order. Free shipping over ₹1,000. Registered members save 10%.</p>
+  <div class="promo__track" aria-hidden="true"><span class="promo__run">Pre-orders only <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> Pre-orders only <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> </span><span class="promo__run">Pre-orders only <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> Pre-orders only <i>&#9670;</i> Free shipping over ₹1,000 <i>&#9670;</i> Members save 10% <i>&#9670;</i> </span></div>
 </div>
 
 <header class="nav">
@@ -833,7 +833,7 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
   <ul class="bag__items" id="bagItems"></ul>
   <p class="bag__empty" id="bagEmpty">Your bag is empty. Pick a tube, a gift set or a hundred-pack to pre-order.</p>
   <div class="bag__foot">
-    <p class="bag__preorder"><b>Pre-order.</b> Everything in your bag dispatches in 2–3 weeks, then usually arrives within 3–7 days.</p>
+    <p class="bag__preorder"><b>Pre-order.</b> Everything in your bag is a pre-order. We send tracking as soon as your parcel ships.</p>
     <p class="bag__sum"><span>Subtotal</span><span id="bagSum">₹0</span></p>
     <p class="bag__fine">Prices are MRP, inclusive of all taxes. Shipping is ₹69, or free on orders over ₹1,000, and is shown at checkout. <span id="bagMember">Members save 10% at checkout. <button type="button" class="linkish" data-account-open>Sign in or join</button></span></p>
     <button class="btn" type="button" id="checkout"><span>Pre-order &amp; pay</span></button>
@@ -894,7 +894,6 @@ const SELLER={
   gstin:'',           /* add your GSTIN here once registered; it will appear in the footer and policies */
   manufacturer:'',    /* name and address of the manufacturer/packer, if different from the seller */
   origin:'India',
-  dispatch:'2–3 weeks',
   delivery:'3–7 days after dispatch',
   updated:'29 September 2026'
 };
@@ -1337,7 +1336,7 @@ function legalHTML(p){
     ['Marketed by',`${esc(SELLER.legalName)}, ${esc(SELLER.address)}`]
   ];
   if(SELLER.manufacturer) rows.push(['Manufactured / packed by',esc(SELLER.manufacturer)]);
-  rows.push(['Customer care',`${esc(SELLER.email)} · ${esc(SELLER.phone)}`],['Dispatch',`Pre-order: dispatches in ${SELLER.dispatch}`]);
+  rows.push(['Customer care',`${esc(SELLER.email)} · ${esc(SELLER.phone)}`],['Dispatch','Pre-order']);
   return `<section class="sh-block"><h3>Product information</h3><dl class="sh-legal">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>`;
 }
 function openSheet(id,opener){
@@ -1390,8 +1389,7 @@ function grievanceBlock(){
 const DOCS={
   shipping:()=>`
     <h3>Pre-orders</h3>
-    <p>Everything on CENKO is currently sold as a pre-order. Orders are dispatched within <b>${SELLER.dispatch}</b> of being placed, and usually arrive ${SELLER.delivery}, depending on your pincode. We send tracking details by email and SMS as soon as your parcel is picked up.</p>
-    <p>If we cannot dispatch within this window we will tell you before the window ends, give you a new date, and offer you the choice to cancel for a full refund.</p>
+    <p>Everything on CENKO is currently sold as a pre-order. Once dispatched, orders usually arrive ${SELLER.delivery}, depending on your pincode. We send tracking details by email and SMS as soon as your parcel is picked up.</p>
     <h3>Where we deliver</h3>
     <p>We currently deliver within India only.</p>
     <h3>Shipping charges</h3>
@@ -1444,7 +1442,7 @@ const DOCS={
     <h3>Prices</h3>
     <p>All prices are in Indian rupees and are the maximum retail price, inclusive of all taxes. Shipping charges are shown separately at checkout before you pay. If a price on the site is clearly wrong, we will contact you before dispatch and you may cancel for a full refund.</p>
     <h3>Pre-orders</h3>
-    <p>Every order is currently a pre-order and is dispatched within ${SELLER.dispatch}. You pay at checkout and can cancel for a full refund at any time before dispatch.</p>
+    <p>Every order is currently a pre-order. You pay at checkout and can cancel for a full refund at any time before dispatch.</p>
     <h3>Orders</h3>
     <p>An order is accepted when we send your order confirmation. We may decline or cancel an order, for example if stock runs out or we suspect fraud. If we do, we refund you in full.</p>
     <h3>Members</h3>
