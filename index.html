@@ -877,11 +877,11 @@ const SHOPIFY={
    Keep these accurate: Indian consumer law requires them to be displayed. */
 const SELLER={
   brand:'CENKO',
-  legalName:'Vasu Goel (sole proprietor), trading as CENKO',
+  legalName:'CENKO',
   address:'Mesa School of Business, Arekere Main Road, Venugopal Reddy Layout, Arekere, 3rd Floor, Bengaluru, Karnataka 560076, India',
   email:'vasugoelop@gmail.com',
   phone:'+91 92050 01808',
-  grievance:{name:'Vasu Goel',designation:'Proprietor and Grievance Officer',email:'vasugoelop@gmail.com',phone:'+91 92050 01808'},
+  grievance:{name:'CENKO Customer Care',designation:'',email:'vasugoelop@gmail.com',phone:'+91 92050 01808'},
   gstin:'',           /* add your GSTIN here once registered; it will appear in the footer and policies */
   manufacturer:'',    /* name and address of the manufacturer/packer, if different from the seller */
   origin:'India',
@@ -1370,7 +1370,7 @@ function sellerBlock(){
 }
 function grievanceBlock(){
   const g=SELLER.grievance;
-  return `<p><b>Grievance Officer:</b> ${esc(g.name)}, ${esc(g.designation)}<br>Email: <a href="mailto:${esc(g.email)}">${esc(g.email)}</a> · Phone: ${esc(g.phone)}<br>We acknowledge every complaint within 48 hours and resolve it within one month of receiving it.</p>`;
+  return `<p><b>Grievance Officer:</b> ${esc(g.name)}${g.designation?`, ${esc(g.designation)}`:''}<br>Email: <a href="mailto:${esc(g.email)}">${esc(g.email)}</a> · Phone: ${esc(g.phone)}<br>We acknowledge every complaint within 48 hours and resolve it within one month of receiving it.</p>`;
 }
 const DOCS={
   shipping:()=>`
