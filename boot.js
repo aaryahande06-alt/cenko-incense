@@ -1,0 +1,1 @@
+(function(d,w){var c=d.documentElement.classList,n=w.navigator,mm=w.matchMedia,fine=mm&&mm('(pointer: fine)').matches,mem=n.deviceMemory||8,cores=n.hardwareConcurrency||8,save=n.connection&&n.connection.saveData;if(!fine||w.innerWidth<860||mem<=4||cores<=4||save)c.add('lite');if(save||mem<=2||cores<=2)c.add('min');c.add('js')})(document,window);
