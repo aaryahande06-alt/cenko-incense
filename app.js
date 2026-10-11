@@ -427,7 +427,7 @@ const coll=$('#collection');
 coll.style.setProperty('--label',COLL[0].label);
 $('#tinrow').innerHTML=COLL.map((c,i)=>{ const d=IMGW[c.img]; return `<li class="tinsku" style="--label:${c.label};--on:${c.on}">
   <button class="tinsku__open" type="button" data-details="${c.id}" aria-haspopup="dialog">
-    <span class="tinsku__img"><span class="card__off" data-off="${c.id}" aria-hidden="true"${c.mrp?'':' hidden'}>${off(c)}% off</span><img src="${IMG[c.img]}" alt="${c.alt}" width="${d[0]}" height="${d[1]}" loading="lazy" decoding="async"></span>
+    <span class="tinsku__img"><span class="card__off" data-off="${c.id}" aria-hidden="true"${c.mrp?'':' hidden'}>${off(c)}% off</span><img src="${IMG[c.img]}" alt="${c.alt}" width="${d[0]}" height="${d[1]}" loading="eager" fetchpriority="low" decoding="async"></span>
     <span class="tinsku__meta"><span class="tinsku__idx">0${i+1}</span><span class="tinsku__name">${c.name}</span><span class="tinsku__sub">${c.sub}</span></span>
   </button>
   <div class="tinsku__foot">${priceHTML(c)}<div class="tinsku__act">
@@ -443,7 +443,7 @@ function cardHTML(p,body){
   return `<article class="card${p.photo?' card--photo':''}">
     <button class="card__shot" type="button" data-details="${p.id}" aria-haspopup="dialog" aria-label="Details about ${p.name}">
       <span class="card__off" data-off="${p.id}" aria-hidden="true"${p.mrp?'':' hidden'}>${off(p)}% off</span>
-      <img src="${IMG[p.img]}" alt="${p.alt}" width="${d[0]}" height="${d[1]}" loading="lazy" decoding="async">
+      <img src="${IMG[p.img]}" alt="${p.alt}" width="${d[0]}" height="${d[1]}" loading="eager" fetchpriority="low" decoding="async">
     </button>
     <div class="card__body"><h3>${p.name}</h3><p class="card__spec">${p.spec}</p>${body}</div>
     <div class="card__buy">${priceHTML(p)}<div class="card__act">
@@ -1151,6 +1151,8 @@ document.addEventListener('visibilitychange',()=>{ document.title=(document.hidd
 try{ console.log('%cCENKO%c\nRolled thin. Burned slow.','font:20px serif;color:#FFC98A;letter-spacing:.34em','color:#8E9399'); }catch(_){}
 
 /* ============ loop ============ */
+let loopPaused=false;
+new MutationObserver(()=>{ if(loopPaused&&!body.classList.contains('sheet-open')&&!body.classList.contains('bag-open')){ loopPaused=false; last=performance.now(); requestAnimationFrame(frame); } }).observe(body,{attributes:true,attributeFilter:['class']});
 let last=performance.now(), lastSY=scrollY, sVel=0, frameN=0, lastDone=-1, geoDirty=true;
 const Q={tier:MIN?2:(LITE?1:0), ema:16.7, n:0, t0:performance.now()+3500};
 function degrade(){
@@ -1160,6 +1162,7 @@ function degrade(){
 }
 function frame(now){
   const raw=now-last, dt=Math.min(raw/1000,1/24); last=now; frameN++;
+  if(body.classList.contains('sheet-open')||body.classList.contains('bag-open')){ loopPaused=true; return; } /* panel open: stop the smoke, marquee and scroll effects behind it until it closes */
   if(Q.tier<2&&now>Q.t0&&!document.hidden&&raw<250&&(smoke.visible||smoke2.visible)){ Q.ema+=(raw-Q.ema)*.05; if(++Q.n>90&&Q.ema>24) degrade(); }
   if(!lit){
     hold=clamp(hold+(holding?dt/1.5:-dt/.9));
@@ -1200,4 +1203,6 @@ layout();
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ layoutRit(); measureMq(); measure(); });
 addEventListener('load',measure);
 requestAnimationFrame(frame);
+/* warm the photos used inside the tube details so they open instantly */
+addEventListener('load',()=>setTimeout(()=>['f_exotica','f_nature','f_tranquility','f_rejuvenation'].forEach(k=>{ const im=new Image(); im.decoding='async'; im.src=IMG[k]; }),2500));
 })();
