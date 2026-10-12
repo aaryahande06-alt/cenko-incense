@@ -597,6 +597,11 @@ html.lite .hero__hint i::after{animation-duration:4s}
 html.lite .dawn canvas{will-change:auto}
 /* v3.2: while a panel is open, everything behind it holds still */
 body.sheet-open .eq i,body.bag-open .eq i,body.sheet-open .burn__ember,body.bag-open .burn__ember,body.sheet-open .hero__hint i::after,body.bag-open .hero__hint i::after{animation-play-state:paused}
+/* v3.3: inside the bag and account panels use the normal mouse pointer (the custom cursor is driven by the paused animation loop) */
+body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
+.has-cursor.sheet-open,.has-cursor.bag-open{cursor:auto}
+.has-cursor.sheet-open :is(a,button,[role="tab"],label,summary),.has-cursor.bag-open :is(a,button,[role="tab"],label,summary){cursor:pointer}
+.has-cursor.sheet-open input,.has-cursor.bag-open input{cursor:text}
 </style>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cenko-serif-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cenko-sans-400.woff2" crossorigin>
