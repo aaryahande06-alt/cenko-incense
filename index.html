@@ -602,6 +602,19 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
 .has-cursor.sheet-open,.has-cursor.bag-open{cursor:auto}
 .has-cursor.sheet-open :is(a,button,[role="tab"],label,summary),.has-cursor.bag-open :is(a,button,[role="tab"],label,summary){cursor:pointer}
 .has-cursor.sheet-open input,.has-cursor.bag-open input{cursor:text}
+/* ---------- v4: lightweight rendering on every device ---------- */
+.nav__glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,16,13,.84)}
+.ch,.w{filter:none!important;transition-property:opacity,transform!important}
+.tinsku__img img,.card__shot img,.sh-media img{filter:none!important}
+.rp__art .em,.listen__glyph .em{filter:none!important}
+.dawn canvas,.row{will-change:auto}
+.cursor{display:none!important}
+.row{animation:mq var(--mqd,80s) linear infinite}
+.row[data-dir="1"]{animation-direction:reverse}
+@keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media (prefers-reduced-motion:reduce){ .row{animation:none} }
+/* v4: the smoke only needs the column above the stick: a narrower canvas is far cheaper to redraw */
+.hero__canvas,.foot__canvas{inset:0 auto 0 50%;width:min(100%,760px);transform:translateX(-50%)}
 </style>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cenko-serif-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cenko-sans-400.woff2" crossorigin>
@@ -869,6 +882,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="/app.js?v=93ef355bf8"></script>
+<script src="/app.js?v=a10daaff23"></script>
 </body>
 </html>

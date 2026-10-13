@@ -246,7 +246,7 @@ $$('[data-sound]').forEach(b=>b.addEventListener('click',e=>{
 class Smoke{
   constructor(cv,o={}){
     this.cv=cv; this.g=cv.getContext('2d');
-    this.o=Object.assign({ex:.5,ey:.62,rate:(RM||MIN)?(MIN?0:24):(LITE?36:70),life:7.5,rise:58,turb:46,hist:22,every:2,alpha:LITE?.26:.24,stick:true,max:LITE?320:700},o);
+    this.o=Object.assign({ex:.5,ey:.62,rate:(RM||MIN)?(MIN?0:20):(LITE?22:40),life:7.5,rise:58,turb:46,hist:22,every:1,alpha:LITE?.3:.28,stick:true,max:LITE?170:360},o);
     this.ps=[]; this.pool=[]; this.puffs=[]; this.bk=Array.from({length:15},()=>[]);
     this.heat=0; this.fire=0; this.flash=0; this.t=Math.random()*50; this.acc=0; this.frame=0; this.visible=true;
     this.m={x:-1e4,y:-1e4,vx:0,vy:0,px:null,py:null};
@@ -255,7 +255,7 @@ class Smoke{
     sg.fillStyle=gr; sg.fillRect(0,0,128,128); this.sprite=sp;
     this.resize();
   }
-  resize(){ const r=this.cv.getBoundingClientRect(); this.dpr=Math.min(devicePixelRatio||1,document.documentElement.classList.contains('lite')?1:1.25); this.w=r.width; this.h=r.height; this.px=r.left; this.py=r.top+scrollY;
+  resize(){ const r=this.cv.getBoundingClientRect(); this.dpr=Math.min(devicePixelRatio||1,document.documentElement.classList.contains('lite')?.75:1); this.w=r.width; this.h=r.height; this.px=r.left; this.py=r.top+scrollY;
     this.cv.width=Math.round(r.width*this.dpr); this.cv.height=Math.round(r.height*this.dpr); this.g.setTransform(this.dpr,0,0,this.dpr,0,0); }
   leave(){ const m=this.m; m.x=m.y=-1e4; m.px=m.py=null; m.vx=m.vy=0; }
   pointer(x,y){ const m=this.m; if(m.px!==null){ m.vx=lerp(m.vx,clamp((x-m.px)*60,-900,900),.4); m.vy=lerp(m.vy,clamp((y-m.py)*60,-900,900),.4);} m.px=m.x=x; m.py=m.y=y; }
@@ -344,7 +344,7 @@ class Smoke{
 const hero=$('.hero'), gate=$('#gate'), prog=$('.g-prog');
 const smoke=new Smoke($('#smoke'),{ey:innerWidth<860?.6:.63});
 hero.style.setProperty('--ey',(smoke.o.ey*100)+'%');
-const smoke2=new Smoke($('#smoke2'),{ey:.9,rate:MIN?0:RM?16:(LITE?22:48),alpha:.2,life:9,rise:52,max:LITE?220:480});
+const smoke2=new Smoke($('#smoke2'),{ey:.9,rate:MIN?0:RM?14:(LITE?14:28),alpha:.24,life:9,rise:52,max:LITE?120:260});
 smoke2.fire=1; smoke2.heat=1;
 
 let lit=false, holding=false, hold=0, fireT=0;
@@ -367,8 +367,8 @@ if(scrollY>40) light(false);
 /* ============ cursor ============ */
 const cur=$('.cursor'), curLabel=$('.cursor__label');
 let mx=innerWidth/2, my=innerHeight/2, cxp=mx+1, cyp=my, moved=true;
-if(FINE) body.classList.add('has-cursor');
-else { const gh=$('#gateHelp'); if(gh) gh.textContent='Touch and hold to light'; }
+/* v4: custom cursor removed - the native pointer is lighter and always responsive */
+if(!FINE){ const gh=$('#gateHelp'); if(gh) gh.textContent='Touch and hold to light'; }
 addEventListener('pointermove',e=>{
   mx=e.clientX; my=e.clientY;
   moved=true;
@@ -427,7 +427,7 @@ const coll=$('#collection');
 coll.style.setProperty('--label',COLL[0].label);
 $('#tinrow').innerHTML=COLL.map((c,i)=>{ const d=IMGW[c.img]; return `<li class="tinsku" style="--label:${c.label};--on:${c.on}">
   <button class="tinsku__open" type="button" data-details="${c.id}" aria-haspopup="dialog">
-    <span class="tinsku__img"><span class="card__off" data-off="${c.id}" aria-hidden="true"${c.mrp?'':' hidden'}>${off(c)}% off</span><img src="${IMG[c.img]}" alt="${c.alt}" width="${d[0]}" height="${d[1]}" loading="eager" fetchpriority="low" decoding="async"></span>
+    <span class="tinsku__img"><span class="card__off" data-off="${c.id}" aria-hidden="true"${c.mrp?'':' hidden'}>${off(c)}% off</span><img src="${IMG[c.img]}" alt="${c.alt}" width="${d[0]}" height="${d[1]}" loading="${window.__warm?'eager':'lazy'}" decoding="async"></span>
     <span class="tinsku__meta"><span class="tinsku__idx">0${i+1}</span><span class="tinsku__name">${c.name}</span><span class="tinsku__sub">${c.sub}</span></span>
   </button>
   <div class="tinsku__foot">${priceHTML(c)}<div class="tinsku__act">
@@ -443,7 +443,7 @@ function cardHTML(p,body){
   return `<article class="card${p.photo?' card--photo':''}">
     <button class="card__shot" type="button" data-details="${p.id}" aria-haspopup="dialog" aria-label="Details about ${p.name}">
       <span class="card__off" data-off="${p.id}" aria-hidden="true"${p.mrp?'':' hidden'}>${off(p)}% off</span>
-      <img src="${IMG[p.img]}" alt="${p.alt}" width="${d[0]}" height="${d[1]}" loading="eager" fetchpriority="low" decoding="async">
+      <img src="${IMG[p.img]}" alt="${p.alt}" width="${d[0]}" height="${d[1]}" loading="${window.__warm?'eager':'lazy'}" decoding="async">
     </button>
     <div class="card__body"><h3>${p.name}</h3><p class="card__spec">${p.spec}</p>${body}</div>
     <div class="card__buy">${priceHTML(p)}<div class="card__act">
@@ -659,9 +659,9 @@ sheet.addEventListener('keydown',e=>{
 const dawn=$('.dawn'), sun=$('.dawn__sun'), layers=$$('.dawn canvas');
 let dawnFlat=false;
 function drawRidges(){
-  const w=dawn.clientWidth, h=Math.round(dawn.clientHeight*1.32), dpr=Math.min(devicePixelRatio||1,document.documentElement.classList.contains('lite')?1:1.25);
+  const w=dawn.clientWidth, h=Math.round(dawn.clientHeight*1.32), dpr=1;
   const spec=[{base:.47,amp:.17,alpha:.15,freq:1.2,seed:11,wash:.24},{base:.58,amp:.2,alpha:.3,freq:1.8,seed:23,wash:.28},{base:.71,amp:.22,alpha:.58,freq:2.5,seed:37,wash:.32}];
-  const flat=dawnFlat=document.documentElement.classList.contains('lite');
+  const flat=dawnFlat=true; /* v4: single still layer on every device */
   layers.forEach((cv,k)=>{
     const s=spec[k], tgt=flat?layers[0]:cv, extra=flat&&k>0;
     if(extra){ cv.style.display='none'; cv.width=cv.height=1; } else { cv.style.display=''; cv.style.transform=''; tgt.width=w*dpr; tgt.height=h*dpr; tgt.style.height=h+'px'; }
@@ -706,7 +706,7 @@ rows[1].innerHTML=noteHTML(allNotes.slice(half)).repeat(2);
 rows.forEach(r=>r.setAttribute('aria-hidden','true'));
 rows[0].insertAdjacentHTML('beforebegin',`<p class="sr">${allNotes.map(x=>x.n).join(', ')}</p>`);
 const mq=rows.map(el=>({el,dir:+el.dataset.dir,x:0,w:0}));
-function measureMq(){ mq.forEach(m=>{ m.w=m.el.scrollWidth/2; if(m.dir>0&&m.x===0) m.x=-m.w; }); }
+function measureMq(){ mq.forEach(m=>{ m.w=m.el.scrollWidth/2; m.el.style.setProperty('--mqd',Math.max(20,m.w/36).toFixed(1)+'s'); }); } /* v4: CSS-animated, 36px/s */
 
 /* ============ burn indicator ============ */
 const burnEl=$('.burn'), bStick=$('.burn__stick'), bAsh=$('.burn__ash'), bEmber=$('.burn__ember');
@@ -1153,11 +1153,11 @@ try{ console.log('%cCENKO%c\nRolled thin. Burned slow.','font:20px serif;color:#
 /* ============ loop ============ */
 let loopPaused=false;
 new MutationObserver(()=>{ if(loopPaused&&!body.classList.contains('sheet-open')&&!body.classList.contains('bag-open')){ loopPaused=false; last=performance.now(); requestAnimationFrame(frame); } }).observe(body,{attributes:true,attributeFilter:['class']});
-let last=performance.now(), lastSY=scrollY, sVel=0, frameN=0, lastDone=-1, geoDirty=true;
+let sAcc=0, last=performance.now(), lastSY=scrollY, sVel=0, frameN=0, lastDone=-1, geoDirty=true;
 const Q={tier:MIN?2:(LITE?1:0), ema:16.7, n:0, t0:performance.now()+3500};
 function degrade(){
   Q.tier++; Q.n=0; Q.ema=16.7; const html=document.documentElement;
-  if(Q.tier===1){ html.classList.add('lite'); for(const k of [smoke,smoke2]){ k.o.rate*=.5; k.o.max=Math.round(k.o.max*.5); k.resize(); } drawRidges(); geoDirty=true; }
+  if(Q.tier===1){ html.classList.add('lite'); for(const k of [smoke,smoke2]){ k.o.rate*=.5; k.o.max=Math.round(k.o.max*.5); k.resize(); } geoDirty=true; } /* v4: no ridge redraw here (it caused a hitch) */
   if(Q.tier>=2){ html.classList.add('lite','min'); for(const k of [smoke,smoke2]){ k.o.rate=0; } }
 }
 function frame(now){
@@ -1173,12 +1173,8 @@ function frame(now){
   }
   if(Smooth.active){ Smooth.cur=lerp(Smooth.cur,Smooth.tgt,1-Math.exp(-dt*Smooth.rate)); if(Math.abs(Smooth.tgt-Smooth.cur)<.4){ Smooth.cur=Smooth.tgt; Smooth.active=false; } scrollTo(0,Smooth.cur); }
   const sy=scrollY; sVel=lerp(sVel,(sy-lastSY)/Math.max(dt,.001),.12); lastSY=sy;
-  if(smoke.visible){ smoke.update(dt); smoke.draw(); }
-  if(smoke2.visible){ smoke2.update(dt); smoke2.draw(); }
-  if(FINE){ if(Math.abs(mx-cxp)+Math.abs(my-cyp)>.2){ cxp=lerp(cxp,mx,1-Math.exp(-dt*18)); cyp=lerp(cyp,my,1-Math.exp(-dt*18)); cur.style.transform=`translate3d(${cxp.toFixed(1)}px,${cyp.toFixed(1)}px,0)`; }
-    if(sy!==lastDone) moved=true; if(frameN%6===0&&moved){ moved=false; cursorState(); } }
+  sAcc+=dt; if(sAcc>=1/31){ const sd=Math.min(sAcc,1/12); sAcc=0; if(smoke.visible){ smoke.update(sd); smoke.draw(); } if(smoke2.visible){ smoke2.update(sd); smoke2.draw(); } } /* v4: smoke at 30fps */
   if(sy!==lastDone||geoDirty){ geoDirty=false; lastDone=sy; updRit(sy); updDawn(sy); updBurn(sy); }
-  if(vis.notes&&!RM){ const boost=Math.min(Math.abs(sVel)/60,14); mq.forEach(m=>{ m.x+=m.dir*(36+boost*28)*dt; if(m.x<=-m.w)m.x+=m.w; if(m.x>0)m.x-=m.w; m.el.style.transform=`translate3d(${m.x.toFixed(1)}px,0,0)`; }); }
   requestAnimationFrame(frame);
 }
 
@@ -1203,6 +1199,6 @@ layout();
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ layoutRit(); measureMq(); measure(); });
 addEventListener('load',measure);
 requestAnimationFrame(frame);
-/* warm the photos used inside the tube details so they open instantly */
-addEventListener('load',()=>setTimeout(()=>['f_exotica','f_nature','f_tranquility','f_rejuvenation'].forEach(k=>{ const im=new Image(); im.decoding='async'; im.src=IMG[k]; }),2500));
+/* v4: once the page is up, fetch the remaining product photos quietly so cards are ready before you scroll to them */
+addEventListener('load',()=>setTimeout(()=>{ window.__warm=1; document.querySelectorAll('img[loading="lazy"]').forEach(im=>im.loading='eager'); ['f_exotica','f_nature','f_tranquility','f_rejuvenation'].forEach(k=>{ const im=new Image(); im.decoding='async'; im.src=IMG[k]; }); },1200));
 })();
