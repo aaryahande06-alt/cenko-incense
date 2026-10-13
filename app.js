@@ -431,7 +431,7 @@ $('#tinrow').innerHTML=COLL.map((c,i)=>{ const d=IMGW[c.img]; return `<li class=
     <span class="tinsku__meta"><span class="tinsku__idx">0${i+1}</span><span class="tinsku__name">${c.name}</span><span class="tinsku__sub">${c.sub}</span></span>
   </button>
   <div class="tinsku__foot">${priceHTML(c)}<div class="tinsku__act">
-    <button class="btn btn--sm" type="button" data-add="${c.id}"><span>Pre-order</span></button>
+    <button class="btn btn--sm" type="button" data-add="${c.id}"><span>Add to bag</span></button>
     <button class="linkbtn" type="button" data-details="${c.id}" aria-haspopup="dialog">Details<span class="sr"> about ${c.name}</span></button>
   </div></div>
 </li>`; }).join('');
@@ -447,7 +447,7 @@ function cardHTML(p,body){
     </button>
     <div class="card__body"><h3>${p.name}</h3><p class="card__spec">${p.spec}</p>${body}</div>
     <div class="card__buy">${priceHTML(p)}<div class="card__act">
-      <button class="btn btn--sm" type="button" data-add="${p.id}"><span>Pre-order</span></button>
+      <button class="btn btn--sm" type="button" data-add="${p.id}"><span>Add to bag</span></button>
       <button class="linkbtn" type="button" data-details="${p.id}" aria-haspopup="dialog">Details<span class="sr"> about ${p.name}</span></button>
     </div></div>
   </article>`;
@@ -488,14 +488,14 @@ function legalHTML(p){
     ['Marketed by',`${esc(SELLER.legalName)}, ${esc(SELLER.address)}`]
   ];
   if(SELLER.manufacturer) rows.push(['Manufactured / packed by',esc(SELLER.manufacturer)]);
-  rows.push(['Customer care',`${esc(SELLER.email)} · ${esc(SELLER.phone)}`],['Dispatch','Pre-order']);
+  rows.push(['Customer care',`${esc(SELLER.email)} · ${esc(SELLER.phone)}`],['Dispatch','In stock, ready to ship']);
   return `<section class="sh-block"><h3>Product information</h3><dl class="sh-legal">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>`;
 }
 function openSheet(id,opener){
   const p=CATALOG.find(x=>x.id===id); if(!p) return;
   sheetId=id; sheetOpener=opener||document.activeElement;
   sheetScroll.innerHTML=sheetHTML(p); sheetScroll.scrollTop=0;
-  sheetBar.hidden=false; sheetBar.innerHTML=`${priceHTML(p)}<button class="btn" type="button" data-add="${p.id}"><span>Pre-order</span></button>`;
+  sheetBar.hidden=false; sheetBar.innerHTML=`${priceHTML(p)}<button class="btn" type="button" data-add="${p.id}"><span>Add to bag</span></button>`;
   $$('[data-add]',sheetBar).forEach(setAddState);
   sheetPanel.style.setProperty('--label',p.label||'#1B1714'); sheetPanel.style.setProperty('--on',p.on||'#fff');
   sheet.inert=false; sheet.setAttribute('aria-hidden','false');
@@ -540,18 +540,18 @@ function grievanceBlock(){
 }
 const DOCS={
   shipping:()=>`
-    <h3>Pre-orders</h3>
-    <p>Everything on CENKO is currently sold as a pre-order. Once dispatched, orders usually arrive ${SELLER.delivery}, depending on your pincode. We send tracking details by email and SMS as soon as your parcel is picked up.</p>
+    <h3>Dispatch and delivery</h3>
+    <p>Everything on CENKO ships from stock. Once dispatched, orders usually arrive ${SELLER.delivery}, depending on your pincode. We send tracking details by email and SMS as soon as your parcel is picked up.</p>
     <h3>Where we deliver</h3>
     <p>We currently deliver within India only.</p>
     <h3>Shipping charges</h3>
-    <p>Shipping is ₹69 per order, and free on orders of ₹1,000 or more. The exact charge is always shown at checkout before you pay. There are no other fees.</p>
+    <p>Shipping is ₹99 per order, and free on orders of ₹999 or more. The exact charge is always shown at checkout before you pay. There are no other fees.</p>
     <h3>Couriers</h3>
     <p>Orders are shipped through our logistics partner, Delhivery.</p>
     <h3>Damaged in transit</h3>
     <p>If your parcel arrives damaged or tampered with, please photograph it and write to us within 48 hours of delivery. We will replace the item or refund it in full, at no cost to you. See our returns policy for details.</p>`,
   returns:()=>`
-    <h3>Cancelling a pre-order</h3>
+    <h3>Cancelling an order</h3>
     <p>You can cancel any order at any time before it is dispatched, for a full refund. Email or call us with your order number. Refunds go back to your original payment method within 5–7 working days of cancellation.</p>
     <h3>Returns within 7 days</h3>
     <p>You can return any item within <b>7 days of delivery</b> if it is unopened and unused, with its seals and original packaging intact. Write to us with your order number before sending it back; we will share the return address. For these returns you arrange and pay for the return shipping. We refund the item price (and the original shipping charge if you return the whole order) within 7 days of receiving it.</p>
@@ -572,7 +572,7 @@ const DOCS={
     <li>A small amount of data stored in your own browser to keep your bag and sign-in working. We do not use advertising trackers on this website.</li></ul>
     <p>Payments are handled by Shopify and Razorpay. We never see or store your card, UPI or bank details.</p>
     <h3>Why we use it</h3>
-    <ul><li>To take, deliver and support your orders, including pre-order updates, returns and refunds.</li>
+    <ul><li>To take, deliver and support your orders, including delivery updates, returns and refunds.</li>
     <li>To run your account, show your past orders and apply member pricing.</li>
     <li>To keep the records that tax and consumer laws require.</li>
     <li>To send our letter and offers, only with your consent. You can withdraw consent at any time using the link in every email or by writing to us.</li></ul>
@@ -593,8 +593,8 @@ const DOCS={
     <p>Our incense is made by hand, so colour, length and fragrance strength can vary slightly between batches. Product photos are as accurate as we can make them.</p>
     <h3>Prices</h3>
     <p>All prices are in Indian rupees and are the maximum retail price, inclusive of all taxes. Shipping charges are shown separately at checkout before you pay. If a price on the site is clearly wrong, we will contact you before dispatch and you may cancel for a full refund.</p>
-    <h3>Pre-orders</h3>
-    <p>Every order is currently a pre-order. You pay at checkout and can cancel for a full refund at any time before dispatch.</p>
+    <h3>Cancellations</h3>
+    <p>You pay at checkout and can cancel for a full refund at any time before your order is dispatched.</p>
     <h3>Orders</h3>
     <p>An order is accepted when we send your order confirmation. We may decline or cancel an order, for example if stock runs out or we suspect fraud. If we do, we refund you in full.</p>
     <h3>Members</h3>
@@ -609,7 +609,7 @@ const DOCS={
   contact:()=>`
     <h3>Seller</h3>${sellerBlock()}
     <h3>Customer care</h3>
-    <p>Write or call us about orders, pre-order dates, returns or anything else. We reply within one working day.</p>
+    <p>Write or call us about orders, deliveries, returns or anything else. We reply within one working day.</p>
     <h3>Grievances</h3>${grievanceBlock()}
     <p>If your complaint is not resolved, you can contact the National Consumer Helpline on 1915 or at consumerhelpline.gov.in, or file online at e-daakhil.nic.in.</p>`
 };
@@ -767,7 +767,7 @@ function refreshPrices(){
 function setAddState(b){
   const p=CATALOG.find(x=>x.id===b.dataset.add), out=SHOP_ON&&!!p&&p.available===false;
   b.disabled=out; b.classList.toggle('is-out',out);
-  const s=b.querySelector('span'); if(s) s.textContent=out?'Sold out':'Pre-order';
+  const s=b.querySelector('span'); if(s) s.textContent=out?'Sold out':'Add to bag';
 }
 
 /* the cart lives in Shopify; its id is remembered in this browser so the bag survives a reload */
@@ -826,7 +826,7 @@ function renderBag(){
 }
 function addToBag(id){
   const p=CATALOG.find(x=>x.id===id); if(!p) return;
-  if(!SHOP_ON){ bag.set(id,(bag.get(id)||0)+1); renderBag(); toast(`${p.name} added as a pre-order`); Sound.bowl(659.3,.04,3); return; }
+  if(!SHOP_ON){ bag.set(id,(bag.get(id)||0)+1); renderBag(); toast(`${p.name} added to your bag`); Sound.bowl(659.3,.04,3); return; }
   Sound.bowl(659.3,.04,3);
   run(async()=>{
     await productsReady;
@@ -838,7 +838,7 @@ function addToBag(id){
       try{ await cartCall(M_ADD,{id:cart.id,lines},'cartLinesAdd'); }
       catch(e){ if(/exist|not found|invalid|expired/i.test(e.message)){ setCart(null); await create(); } else throw e; }
     }
-    toast(`${p.name} added as a pre-order`);
+    toast(`${p.name} added to your bag`);
   });
 }
 function changeQty(key,delta){
@@ -1020,7 +1020,7 @@ function accountHTML(){
       <span class="acct__badge">Member · 10% off every order</span>
       <p style="margin-top:16px">${me&&me.first?`Hello ${esc(me.first)}. `:''}Your member discount is applied automatically at checkout while you are signed in.</p>
       <h3>Your orders</h3>
-      ${o==null?`<p>Loading your orders…</p>`:o.length?`<ul class="acct__orders">${o.map(orderHTML).join('')}</ul>`:`<p>No orders yet. Your pre-orders will appear here as soon as you place them.</p>`}
+      ${o==null?`<p>Loading your orders…</p>`:o.length?`<ul class="acct__orders">${o.map(orderHTML).join('')}</ul>`:`<p>No orders yet. Your orders will appear here as soon as you place them.</p>`}
       <div class="acct__row"><a href="${ACC_HOME}/orders" target="_blank" rel="noopener">All orders</a><a href="${ACC_HOME}/profile" target="_blank" rel="noopener">Addresses and profile</a><button type="button" class="linkish" data-acc-logout>Sign out</button></div>
     </article>`;
   }

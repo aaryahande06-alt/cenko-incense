@@ -418,7 +418,6 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
 .hero__tag{top:calc(13vh + var(--promo))}
 
 /* ---------- bag extras ---------- */
-.bag__preorder{font-size:13px;line-height:1.5;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.06)}
 .bag__fine{font-size:12px;line-height:1.55;color:var(--ink-dim)}
 .bag__note a{text-decoration:underline;text-underline-offset:3px}
 .bag__member{display:flex;justify-content:space-between;font-size:14px;color:#2F5F3A}
@@ -797,7 +796,7 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
     </div>
 
     <div class="tinshelf">
-      <p class="tinshelf__hint">Open a tube for its fragrances, or pre-order it straight away.</p>
+      <p class="tinshelf__hint">Open a tube for its fragrances, or add it to your bag straight away.</p>
       <ul class="tinrow" id="tinrow"></ul>
     </div>
   </section>
@@ -862,12 +861,11 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
 <aside class="bag" id="bag" role="dialog" aria-modal="true" aria-labelledby="bagTitle" aria-hidden="true">
   <div class="bag__head"><h2 id="bagTitle">Your bag</h2><button type="button" data-bag-close>Close</button></div>
   <ul class="bag__items" id="bagItems"></ul>
-  <p class="bag__empty" id="bagEmpty">Your bag is empty. Pick a tube, a gift set or a hundred-pack to pre-order.</p>
+  <p class="bag__empty" id="bagEmpty">Your bag is empty. Pick a tube, a gift set or a hundred-pack.</p>
   <div class="bag__foot">
-    <p class="bag__preorder"><b>Pre-order.</b> Everything in your bag is a pre-order. We send tracking as soon as your parcel ships.</p>
     <p class="bag__sum"><span>Subtotal</span><span id="bagSum">₹0</span></p>
-    <p class="bag__fine">Prices are MRP, inclusive of all taxes. Shipping is ₹69, or free on orders over ₹1,000, and is shown at checkout. <span id="bagMember">Members save 10% at checkout. <button type="button" class="linkish" data-account-open>Sign in or join</button></span></p>
-    <button class="btn" type="button" id="checkout"><span>Pre-order &amp; pay</span></button>
+    <p class="bag__fine">Prices are MRP, inclusive of all taxes. Shipping is ₹99, or free on orders of ₹999 or more, and is shown at checkout. <span id="bagMember">Members save 10% at checkout. <button type="button" class="linkish" data-account-open>Sign in or join</button></span></p>
+    <button class="btn" type="button" id="checkout"><span>Checkout</span></button>
     <p class="bag__note">Secure checkout by Shopify. Pay by UPI, card, netbanking or wallet through Razorpay. By placing an order you agree to our <a href="#help" data-doc="terms">Terms</a> and <a href="#help" data-doc="returns">Returns policy</a>.</p>
   </div>
 </aside>
@@ -882,6 +880,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="/app.js?v=a10daaff23"></script>
+<script src="/app.js?v=910b03d706"></script>
 </body>
 </html>
