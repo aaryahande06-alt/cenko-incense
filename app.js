@@ -41,7 +41,7 @@ const SELLER={
   delivery:'3–7 days after dispatch',
   updated:'29 September 2026'
 };
-const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=2", "p_lemongrass": "/img/p_lemongrass.webp?v=2", "p_rose": "/img/p_rose.webp?v=2", "p_musk": "/img/p_musk.webp?v=2", "p_lavender": "/img/p_lavender.webp?v=2", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp", "t_rejuvenation": "/img/t_rejuvenation.webp", "t_nature": "/img/t_nature.webp", "t_tranquility": "/img/t_tranquility.webp"};
+const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=3", "p_lemongrass": "/img/p_lemongrass.webp?v=3", "p_rose": "/img/p_rose.webp?v=3", "p_musk": "/img/p_musk.webp?v=3", "p_lavender": "/img/p_lavender.webp?v=3", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp?v=3", "t_rejuvenation": "/img/t_rejuvenation.webp?v=3", "t_nature": "/img/t_nature.webp?v=3", "t_tranquility": "/img/t_tranquility.webp?v=3"};
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(pointer: fine)').matches;
 const LITE = document.documentElement.classList.contains('lite');
@@ -85,27 +85,27 @@ const noise3=(()=>{
 /* ============ content ============ */
 const COLL=[
   {id:'exotica',name:'Exotica',sub:'faraway lands',label:'#D6402A',tint:'#E8D5CC',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_exotica',
-   alt:'The Exotica tube: a brushed metal cylinder with a black lid and a red hexagon-print label',
+   alt:'The Exotica tube, wrapped in a red organza bag tied with gold cord',
    desc:'Warm and resinous. Cedar and amber for long evenings, softened by lilac and lotus.',
    best:'Long evenings, and rooms that need warming up.',
    notes:[['Cedar','#9A6B47'],['Lilac','#8A5A7C'],['Lotus','#C8587A'],['Amber Oriental','#B0492F']]},
   {id:'nature',name:'Nature',sub:'green and open',label:'#56A23A',tint:'#D9E2CF',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_nature',
-   alt:'The Nature tube: a brushed metal cylinder with a black lid and a green label edged in violet',
+   alt:'The Nature tube, wrapped in a green organza bag tied with gold cord',
    desc:'Green and airy. Eucalyptus and patchouli, with violet and a little vanilla for sweetness.',
    best:'Afternoons with the windows open.',
    notes:[['Violet','#7F5A80'],['Vanilla','#D9A865'],['Eucalyptus','#6E8A48'],['White Patchouli','#8FA35E']]},
   {id:'tranquility',name:'Tranquility',sub:'the quiet one',label:'#DE356E',tint:'#EDD6DE',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_tranquility',
-   alt:'The Tranquility tube: a brushed metal cylinder with a black lid and a pink label edged in teal',
+   alt:'The Tranquility tube, wrapped in a pink organza bag tied with gold cord',
    desc:'Sandalwood and myrrh, lifted by rose and jasmine. The one people buy again.',
    best:'Winding down at the end of the day.',
    notes:[['Rose','#C94C6D'],['Myrrh','#3C7176'],['Jasmine','#D3A23F'],['Sandalwood','#9A6C4E']]},
   {id:'rejuvenation',name:'Rejuvenation',sub:'for mornings',label:'#4A8ED1',tint:'#D3DEE9',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_rejuvenation',
-   alt:'The Rejuvenation tube: a brushed metal cylinder with a black lid and a blue label edged in red',
+   alt:'The Rejuvenation tube, wrapped in a blue organza bag tied with gold cord',
    desc:'Bright and clean. Peppermint and sea air for mornings that need waking.',
    best:'Mornings, and a desk you need to think at.',
    notes:[['Energy','#C54B3B'],['Sea Shore','#3A7580'],['Blue Angel','#56687A'],['Peppermint','#8C9C4A']]}
 ];
-COLL.forEach(c=>c.box=[['Sticks','40 \u2014 ten of each'],['Fragrances','4 in one tube'],['Holder','Wooden ash catcher'],['Tube','Metal, with a lid']]);
+COLL.forEach(c=>c.box=[['Sticks','40 \u2014 ten of each'],['Fragrances','4 in one tube'],['Holder','Wooden ash catcher'],['Tube','Metal, with a lid'],['Wrap','Organza bag and gold cord']]);
 const SETS=[
   {id:'spice',name:'The Spice Rack',img:'r_spice',mrp:500,price:350,kind:'SET',
    alt:'The Spice Rack gift set: three corked glass vials of incense in a wooden rack, with a hand-painted soapstone holder',
@@ -165,7 +165,7 @@ const WHY=[
   ['Swiss oils','Fragrance oils imported from Switzerland go into every blend.'],
   ['Ready to give','Sets arrive boxed and finished: a present, not a refill.']
 ];
-const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [560, 1359], "p_lemongrass": [560, 1348], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [560, 1378], "p_rose": [560, 1330], "p_lavender": [560, 1331], "g_hampers": [1100, 924]};
+const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [500, 1219], "p_lemongrass": [500, 1273], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [281, 1000], "t_rejuvenation": [247, 1000], "t_nature": [216, 1000], "t_tranquility": [333, 1000], "p_musk": [500, 1285], "p_rose": [500, 1311], "p_lavender": [500, 1268], "g_hampers": [1100, 924]};
 const fmt=n=>'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:2});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -1076,38 +1076,90 @@ $('#subBtn').addEventListener('click',subscribe);
 $('#email').addEventListener('keydown',e=>{ if(e.key==='Enter') subscribe(); });
 
 /* ============ gifting: bulk and hamper enquiries ============
-   No form endpoint to keep: the enquiry is composed here and handed to the
-   customer's own mail app or WhatsApp, so nothing is stored on our side. */
-const hq={};
-['Name','Org','Email','Phone','Qty','Occ','What','Msg','Addr','Mail','Wa'].forEach(k=>{ hq[k.toLowerCase()]=$('#hq'+k); });
+   The buyer picks what goes in one hamper from the live catalogue, and the
+   enquiry is composed here and handed to their own mail app or WhatsApp,
+   so nothing is stored on our side. */
+const hq={}, HB={}; /* HB: product id -> pieces per hamper */
+['Name','Org','Email','Phone','Qty','What','Msg','Addr','Mail','Wa','Card'].forEach(k=>{ hq[k.toLowerCase()]=$('#hq'+k); });
+const hbList=$('#hbList'), hbEach=$('#hbEach'), hbTotal=$('#hbTotal'), hbNote=$('#hbNote');
 if(hq.addr){ hq.addr.textContent=SELLER.email; hq.addr.href='mailto:'+SELLER.email; hq.addr.removeAttribute('data-doc'); }
-function hqBad(el,on){ const f=el&&el.closest('.hfield'); if(f) f.classList.toggle('is-bad',!!on); }
+const HB_KIND={TIN:'Tube',SET:'Gift set','100s':'Hundred-pack'};
+function hbTile(p){
+  const n=HB[p.id]||0, out=SHOP_ON&&p.available===false;
+  return `<li class="hb__item${n?' is-on':''}" data-hb-id="${p.id}">
+    <span class="hb__thumb"><img src="${IMG[p.img]}" alt="" loading="${window.__warm?'eager':'lazy'}" decoding="async"></span>
+    <span class="hb__name"><b>${esc(p.name)}</b><span>${fmt(p.price)}${p.mrp&&p.mrp>p.price?`<s>${fmt(p.mrp)}</s>`:''}</span>${out?'<em>Restocking, ask us</em>':''}</span>
+    <span class="hb__step"><button type="button" data-hb="-1" aria-label="One fewer ${esc(p.name)}"${n?'':' disabled'}>&minus;</button><output aria-label="${esc(p.name)} per hamper">${n}</output><button type="button" data-hb="1" aria-label="One more ${esc(p.name)}">+</button></span>
+  </li>`;
+}
+function hbRender(){
+  [['#hbTIN',COLL],['#hbSET',SETS],['#hb100s',PACKS]].forEach(([s,list])=>{ const el=$(s); if(el) el.innerHTML=list.map(hbTile).join(''); });
+  hbSum();
+}
+function hbItems(){ return CATALOG.filter(p=>HB[p.id]>0).map(p=>({p,n:HB[p.id]})); }
+function hbSum(){
+  if(!hbList) return;
+  const items=hbItems(), each=items.reduce((s,x)=>s+x.p.price*x.n,0), q=parseInt(hq.qty&&hq.qty.value,10)||0;
+  hbList.innerHTML=items.length?items.map(x=>`<li><span>${x.n} &times; ${esc(x.p.name)} <small>(${HB_KIND[x.p.kind]})</small></span><b>${fmt(x.p.price*x.n)}</b></li>`).join('')
+    :'<li class="hb__empty">Nothing yet. Add a few things and they will appear here.</li>';
+  hbEach.textContent=fmt(each);
+  hbTotal.textContent=q&&each?fmt(each*q):'—';
+  hbNote.classList.toggle('is-low',!!q&&q<25);
+  hbNote.textContent=!q?'Bulk pricing starts at 25 hampers.'
+    :q<25?'Bulk pricing starts at 25. For fewer, the shop prices above are already the best we can do.'
+    :q>100?'Over 100 pieces: your card or logo on the band is free.':'We will quote you a price per hamper below these shop prices.';
+  $$('[data-hbq]').forEach(b=>b.classList.toggle('is-on',+b.dataset.hbq===q));
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-hb]');
+  if(b){ const li=b.closest('[data-hb-id]'), id=li.dataset.hbId, n=Math.max(0,Math.min(20,(HB[id]||0)+(+b.dataset.hb)));
+    HB[id]=n; li.outerHTML=hbTile(CATALOG.find(p=>p.id===id));
+    const again=$(`[data-hb-id="${id}"] [data-hb="${b.dataset.hb}"]`); if(again&&!again.disabled) again.focus({preventScroll:true});
+    else{ const plus=$(`[data-hb-id="${id}"] [data-hb="1"]`); if(plus) plus.focus({preventScroll:true}); }
+    hbSum(); return; }
+  const q=e.target.closest('[data-hbq]');
+  if(q&&hq.qty){ hq.qty.value=q.dataset.hbq; hq.qty.classList.remove('is-bad'); hbSum(); }
+});
+if(hq.qty) hq.qty.addEventListener('input',()=>{ hq.qty.classList.remove('is-bad'); hbSum(); });
+hbRender();
+productsReady.then(hbRender); /* live prices and stock from Shopify */
+
+function hqBad(el,on){ if(!el) return; const f=el.closest('.hfield'); if(f) f.classList.toggle('is-bad',!!on); else el.classList.toggle('is-bad',!!on); }
+const radio=name=>{ const r=$(`input[name="${name}"]:checked`); return r?r.value:''; };
 function hqRead(){
   const v=el=>el?el.value.trim():'';
-  return {name:v(hq.name),org:v(hq.org),email:v(hq.email),phone:v(hq.phone),qty:v(hq.qty),occ:v(hq.occ),what:v(hq.what)};
+  return {name:v(hq.name),org:v(hq.org),email:v(hq.email),phone:v(hq.phone),qty:v(hq.qty),what:v(hq.what),
+    wrap:radio('hqWrap'),occ:radio('hqOcc'),card:!!(hq.card&&hq.card.checked),items:hbItems()};
 }
 /* both routes need enough to reply to and enough to quote on */
 function hqCheck(d){
   [hq.name,hq.email,hq.qty,hq.what].forEach(el=>hqBad(el,false));
-  if(!d.name){ hqBad(hq.name,1); return {el:hq.name,msg:'Tell us your name so we know who we are quoting.'}; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)){ hqBad(hq.email,1); return {el:hq.email,msg:'Enter an email address like name@example.com.'}; }
+  if(!d.items.length&&d.what.length<6){ return {el:$('#hbTIN [data-hb="1"]'),msg:'Add at least one thing to the hamper, or tell us below what you have in mind.'}; }
   const n=parseInt(d.qty,10);
   if(!n||n<1){ hqBad(hq.qty,1); return {el:hq.qty,msg:'Roughly how many hampers do you need?'}; }
   if(n<25){ hqBad(hq.qty,1); return {el:hq.qty,msg:'Bulk pricing starts at 25. For fewer, the shop prices above are already better.'}; }
-  if(d.what.length<6){ hqBad(hq.what,1); return {el:hq.what,msg:'A line on what goes inside helps us quote properly.'}; }
+  if(!d.name){ hqBad(hq.name,1); return {el:hq.name,msg:'Tell us your name so we know who we are quoting.'}; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)){ hqBad(hq.email,1); return {el:hq.email,msg:'Enter an email address like name@example.com.'}; }
   return null;
 }
 function hqBody(d){
+  const each=d.items.reduce((s,x)=>s+x.p.price*x.n,0);
   return [
     'Bulk / hamper enquiry from cenko.in','',
     'Name: '+d.name,
-    d.org?'Company: '+d.org:'',
+    d.org?'Company: '+d.org:null,
     'Email: '+d.email,
-    d.phone?'Phone: '+d.phone:'',
+    d.phone?'Phone: '+d.phone:null,
     'Hampers: '+d.qty,
-    d.occ?'Occasion: '+d.occ:'',
-    '','What they would like inside:',d.what,''
-  ].filter(Boolean).join('\n');
+    d.occ?'Occasion: '+d.occ:null,
+    '','In each hamper:',
+    ...(d.items.length?d.items.map(x=>`- ${x.n} x ${x.p.name} (${HB_KIND[x.p.kind]}, ${fmt(x.p.price)} each)`):['- (see notes)']),
+    d.items.length?`Shop-price value per hamper: ${fmt(each)}`:null,
+    '',
+    'Wrapping: '+(d.wrap||'Not chosen'),
+    'Printed card / logo on the band: '+(d.card?'Yes':'No'),
+    d.what?'':null, d.what?'Notes:':null, d.what||null
+  ].filter(x=>x!==null).join('\n');
 }
 function hqSend(via){
   const d=hqRead(), bad=hqCheck(d);
@@ -1122,7 +1174,7 @@ function hqSend(via){
     hq.msg.textContent='Opening your email app…';
     location.href='mailto:'+SELLER.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
-  setTimeout(()=>{ hq.msg.textContent='Sent from your own email or WhatsApp — we reply to every one.'; },2600);
+  setTimeout(()=>{ hq.msg.textContent='Sent from your own email or WhatsApp. We reply to every one.'; },2600);
 }
 if(hq.mail) hq.mail.addEventListener('click',()=>hqSend('mail'));
 if(hq.wa) hq.wa.addEventListener('click',()=>hqSend('wa'));

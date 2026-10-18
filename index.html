@@ -338,42 +338,119 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
 /* ---------- gifting / bulk hampers ---------- */
 .hamper{position:relative;background:#14110F;color:var(--paper);padding:clamp(92px,12vh,146px) var(--pad) clamp(84px,11vh,132px)}
 .hamper .mark{color:var(--paper)}
-.hamper__head{padding-left:40px;max-width:1180px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5vw;align-items:end;margin-bottom:clamp(44px,7vh,84px)}
-.hamper__head h2{font:400 clamp(34px,4.4vw,72px)/1.04 var(--serif);letter-spacing:-.02em;max-width:11ch}
-.hamper__head p{justify-self:end;max-width:40ch;color:var(--paper-dim);font-size:17px}
-.hamper__shot{padding-left:40px;max-width:1180px;margin:0 0 clamp(40px,6vh,72px)}
-.hamper__shot img{display:block;width:100%;max-width:760px;height:auto}
-.hamper__shot figcaption{margin-top:16px;max-width:46ch;font-size:13px;line-height:1.6;color:rgba(233,231,227,.45)}
-.hamper__grid{padding-left:40px;max-width:1180px;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(36px,5vw,84px);align-items:start}
-.hamper__notes{display:grid;gap:22px;align-content:start}
-.hamper__notes li{padding-top:18px;border-top:1px solid rgba(233,231,227,.18);font-size:15px;line-height:1.62;color:var(--paper-dim)}
-.hamper__notes b{display:block;color:var(--paper);font-weight:500;letter-spacing:.01em}
-.hamper__form{display:grid;gap:20px}
-.hrow{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.hamper__intro,.hamper__steps,.hamper__build{padding-left:40px;max-width:1240px}
+.hamper__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(36px,5vw,90px);align-items:center}
+.hamper__eyebrow{font:500 11px/1 var(--sans);letter-spacing:.38em;text-transform:uppercase;color:var(--glow)}
+.hamper__copy h2{margin:20px 0 22px;font:400 clamp(40px,5vw,78px)/1.02 var(--serif);letter-spacing:-.02em;max-width:10ch}
+.hamper__lede{max-width:44ch;color:var(--paper-dim);font-size:17px;line-height:1.7}
+.hamper__facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:34px 0 36px;max-width:520px}
+.hamper__facts li{display:grid;gap:6px;padding-top:16px;border-top:1px solid rgba(233,231,227,.18)}
+.hamper__facts b{font:400 clamp(26px,2.6vw,36px)/1 var(--serif);color:var(--paper);letter-spacing:-.01em}
+.hamper__facts span{font-size:13px;line-height:1.45;color:rgba(233,231,227,.55)}
+.hamper__shot{margin:0;position:relative}
+.hamper__shot::before{content:"";position:absolute;left:8%;right:8%;bottom:4%;height:16%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,150,80,.16),rgba(255,150,80,0) 70%);pointer-events:none}
+.hamper__shot img{position:relative;display:block;width:100%;max-width:640px;height:auto;margin-left:auto}
+.hamper__shot figcaption{margin:14px 0 0 auto;max-width:40ch;text-align:right;font-size:13px;line-height:1.6;color:rgba(233,231,227,.45)}
+.btn--paper{background:var(--paper);color:#000}
+.btn--paper::before{background:var(--ember)}
+.btn--paper:hover,.btn--paper:focus-visible{color:#000}
+
+.hamper__steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,36px);margin:clamp(64px,9vh,110px) 0 clamp(56px,8vh,96px)}
+.hamper__steps li{display:grid;gap:8px;align-content:start;padding:26px 0 0;border-top:1px solid rgba(233,231,227,.18)}
+.hamper__steps i{font:500 11px/1 var(--sans);font-style:normal;letter-spacing:.3em;color:var(--glow)}
+.hamper__steps b{font:400 clamp(21px,1.8vw,26px)/1.2 var(--serif);font-weight:400;color:var(--paper);margin-top:6px}
+.hamper__steps span{font-size:15px;line-height:1.62;color:var(--paper-dim);max-width:34ch}
+
+.hamper__build{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.9fr);gap:clamp(28px,3.4vw,56px);align-items:start;scroll-margin-top:90px}
+.hb__pick h3,.hb__card h3{font:400 clamp(24px,2.2vw,32px)/1.15 var(--serif);letter-spacing:-.01em}
+.hb__hint{margin:10px 0 28px;font-size:14.5px;line-height:1.6;color:rgba(233,231,227,.55);max-width:52ch}
+.hb__group + .hb__group{margin-top:30px}
+.hb__group h4{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:12px;font:500 11px/1.4 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--paper)}
+.hb__group h4 span{letter-spacing:.04em;text-transform:none;font-size:13px;color:rgba(233,231,227,.45)}
+.hb__grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.hb__item{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 12px 10px 10px;border-radius:16px;background:rgba(233,231,227,.045);box-shadow:inset 0 0 0 1px rgba(233,231,227,.09);transition:background .35s,box-shadow .35s}
+.hb__item.is-on{background:rgba(255,201,138,.08);box-shadow:inset 0 0 0 1px rgba(255,201,138,.55)}
+.hb__thumb{display:grid;place-items:center;width:52px;height:64px;border-radius:10px;background:rgba(233,231,227,.06);overflow:hidden}
+.hb__thumb img{max-width:88%;max-height:88%;width:auto;height:auto;object-fit:contain}
+.hb__name{display:grid;gap:2px;min-width:0}
+.hb__name b{font-weight:500;font-size:14.5px;line-height:1.3;color:var(--paper)}
+.hb__name span{font-size:13px;color:rgba(233,231,227,.55)}
+.hb__name s{opacity:.55;margin-left:4px}
+.hb__name em{font-style:normal;font-size:11px;letter-spacing:.08em;color:#FFB08A}
+.hb__step{display:flex;align-items:center;gap:2px}
+.hb__step button{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:18px;line-height:1;color:var(--paper);box-shadow:inset 0 0 0 1px rgba(233,231,227,.28);transition:background .25s,box-shadow .25s,color .25s}
+.hb__step button:hover,.hb__step button:focus-visible{background:var(--paper);color:#000;box-shadow:none}
+.hb__step button:disabled{opacity:.28;pointer-events:none}
+.hb__step output{min-width:24px;text-align:center;font-variant-numeric:tabular-nums;font-size:15px}
+
+.hb__sum{position:sticky;top:92px;display:grid;gap:12px}
+.hb__card{padding:clamp(22px,2.4vw,30px);border-radius:22px;background:rgba(233,231,227,.05);box-shadow:inset 0 0 0 1px rgba(233,231,227,.1)}
+.hb__card--form{display:grid;gap:18px}
+.hb__list{list-style:none;display:grid;gap:8px;margin:16px 0 18px;padding-bottom:16px;border-bottom:1px solid rgba(233,231,227,.12)}
+.hb__list li{display:flex;justify-content:space-between;gap:14px;font-size:14.5px;line-height:1.45;color:var(--paper-dim)}
+.hb__list li b{font-weight:400;color:var(--paper);white-space:nowrap}
+.hb__list .hb__empty{color:rgba(233,231,227,.42)}
+.hb__line{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:14px;color:var(--paper-dim)}
+.hb__line b{font:400 22px/1 var(--serif);color:var(--paper);white-space:nowrap}
+.hb__line--total{margin-top:14px}
+.hb__line--total b{font-size:28px}
+.hb__note{margin-top:8px;font-size:13px;line-height:1.5;color:var(--glow);min-height:1.5em}
+.hb__note.is-low{color:#FFB08A}
+.hb__field{border:0;margin:18px 0 0;padding:0;min-width:0}
+.hb__label{display:block;margin-bottom:10px;padding:0;font:500 11px/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:rgba(233,231,227,.5)}
+.hb__qty{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.hb__qty input{width:110px;background:transparent;border:0;border-bottom:1px solid rgba(233,231,227,.3);padding:8px 0;color:var(--paper);font:400 22px/1.2 var(--serif);border-radius:0;outline:none}
+.hb__qty input:focus{border-color:var(--paper)}
+.hb__qty input.is-bad{border-color:#E8724B}
+.hb__chips{display:flex;gap:6px}
+.hb__chips button,.hb__opts span{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;font-size:13px;color:var(--paper-dim);box-shadow:inset 0 0 0 1px rgba(233,231,227,.22);transition:background .25s,color .25s,box-shadow .25s;cursor:pointer}
+.hb__chips button:hover,.hb__opts label:hover span{color:var(--paper);box-shadow:inset 0 0 0 1px rgba(233,231,227,.5)}
+.hb__chips button.is-on,.hb__opts input:checked + span{background:var(--paper);color:#000;box-shadow:none}
+.hb__opts{display:flex;flex-wrap:wrap;gap:6px}
+.hb__opts label{position:relative}
+.hb__opts input{position:absolute;opacity:0;width:1px;height:1px}
+.hb__opts input:focus-visible + span{outline:2px solid var(--glow);outline-offset:2px}
+.hb__check{display:flex;gap:12px;align-items:flex-start;margin-top:20px;font-size:14px;line-height:1.5;color:var(--paper-dim);cursor:pointer}
+.hb__check input{flex:none;width:18px;height:18px;margin-top:2px;accent-color:#FFC98A}
+.hb__check i{font-style:normal;color:rgba(233,231,227,.45)}
+
+.hrow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .hfield{display:grid;gap:7px;min-width:0}
 .hfield > span{font:500 11px/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:rgba(233,231,227,.5)}
 .hfield > span i{font-style:normal;letter-spacing:.12em;opacity:.7}
-.hfield input,.hfield select,.hfield textarea{width:100%;min-width:0;background:transparent;border:0;border-bottom:1px solid rgba(233,231,227,.3);padding:11px 0;color:var(--paper);font:400 16px/1.5 var(--sans);outline:none;border-radius:0;transition:border-color .35s}
-.hfield textarea{resize:vertical;min-height:72px}
-.hfield select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,rgba(233,231,227,.55) 50%),linear-gradient(135deg,rgba(233,231,227,.55) 50%,transparent 50%);background-position:calc(100% - 11px) 20px,calc(100% - 6px) 20px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:26px}
-.hfield select option{background:#14110F;color:var(--paper)}
+.hfield input,.hfield textarea{width:100%;min-width:0;background:transparent;border:0;border-bottom:1px solid rgba(233,231,227,.3);padding:10px 0;color:var(--paper);font:400 16px/1.5 var(--sans);outline:none;border-radius:0;transition:border-color .35s}
+.hfield textarea{resize:vertical;min-height:56px}
 .hfield input::placeholder,.hfield textarea::placeholder{color:rgba(233,231,227,.3)}
-.hfield input:focus,.hfield select:focus,.hfield textarea:focus{border-color:var(--paper)}
-.hfield.is-bad input,.hfield.is-bad select,.hfield.is-bad textarea{border-color:#E8724B}
-.hamper__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
+.hfield input:focus,.hfield textarea:focus{border-color:var(--paper)}
+.hfield.is-bad input,.hfield.is-bad textarea{border-color:#E8724B}
+.hamper__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.hamper__actions .btn{flex:1 1 auto;justify-content:center}
 .btn--ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1px rgba(233,231,227,.42)}
 .btn--ghost:hover{box-shadow:inset 0 0 0 1px var(--paper)}
-.hamper__msg{min-height:1.6em;font-size:14px;color:var(--glow)}
+.hamper__msg{min-height:1.5em;font-size:14px;line-height:1.5;color:var(--glow)}
 .hamper__msg.err{color:#FF9A7A}
 .hamper__fine{font-size:12.5px;line-height:1.6;color:rgba(233,231,227,.45)}
 .hamper__fine a{text-decoration:underline;text-underline-offset:3px}
-@media (max-width:900px){
-  .hamper__head,.hamper__grid{grid-template-columns:1fr;padding-left:0}
-  .hamper__shot{padding-left:0}
-  .hamper__head p{justify-self:start}
-  .hamper__grid{gap:40px}
+@media (max-width:1020px){
+  .hamper__build{grid-template-columns:1fr}
+  .hb__sum{position:static}
 }
-@media (max-width:560px){ .hrow{grid-template-columns:1fr} }
+@media (max-width:900px){
+  .hamper__intro,.hamper__steps,.hamper__build{padding-left:0}
+  .hamper__intro{grid-template-columns:1fr}
+  .hamper__shot img{margin:0 auto;max-width:520px}
+  .hamper__shot figcaption{text-align:left;margin-left:0}
+  .hamper__steps{grid-template-columns:1fr;gap:0}
+  .hamper__steps li{padding:20px 0 22px}
+}
+@media (max-width:560px){
+  .hrow{grid-template-columns:1fr}
+  .hamper__facts{gap:12px}
+  .hamper__facts b{font-size:24px}
+  .hamper__facts span{font-size:12px}
+  .hb__grid{grid-template-columns:1fr}
+  .hamper__actions .btn{flex-basis:100%}
+}
 
 /* ---------- why ---------- */
 .virtues{position:relative;background:var(--ash);color:var(--ink);padding:clamp(96px,13vh,150px) var(--pad) clamp(88px,12vh,140px)}
@@ -690,7 +767,7 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   <span class="nav__glass" aria-hidden="true"></span>
   <a class="brand" href="#top"><span class="brand__word">CENKO</span><span class="brand__tag">Incense</span><span class="sr">, back to top</span></a>
   <nav class="nav__links" id="navLinks" aria-label="Sections">
-    <a href="#craft">Craft</a><a href="#ritual">Ritual</a><a class="nav__shop" href="#gifts">Shop</a><a href="#why">Why CENKO</a>
+    <a href="#craft">Craft</a><a href="#ritual">Ritual</a><a class="nav__shop" href="#gifts">Shop</a><a href="#gifting">Gifting</a><a href="#why">Why CENKO</a>
     <a class="nav__m" href="#help" data-doc="shipping">Shipping</a><a class="nav__m" href="#help" data-doc="returns">Returns</a><a class="nav__m" href="#help" data-doc="contact">Contact</a>
   </nav>
   <div class="nav__tools">
@@ -876,58 +953,101 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   <!-- GIFTING -->
   <section class="hamper" id="gifting" aria-label="Gifting and bulk orders">
     <p class="mark">Gifting</p>
-    <div class="hamper__head">
-      <h2 data-reveal>Boxes by the dozen.</h2>
-      <p>Diwali for an office, favours for a wedding, a hamper for a hundred clients. Tell us roughly what you want inside and how many, and we will put it together and quote you.</p>
+
+    <div class="hamper__intro">
+      <div class="hamper__copy">
+        <p class="hamper__eyebrow">Gifting &amp; bulk orders</p>
+        <h2 data-reveal>Boxes by the dozen.</h2>
+        <p class="hamper__lede">Diwali for an office, favours for a wedding, a hamper for a hundred clients. Pick what goes inside, tell us how many, and we will wrap it, pack it and send you a quote.</p>
+        <ul class="hamper__facts">
+          <li><b>25+</b><span>hampers for bulk pricing</span></li>
+          <li><b>1 day</b><span>to hear back with a quote</span></li>
+          <li><b>10&ndash;14</b><span>days to wrap and dispatch</span></li>
+        </ul>
+        <a class="btn btn--paper" href="#hamperBuild"><span>Build a hamper</span></a>
+      </div>
+      <figure class="hamper__shot">
+        <img src="/img/g_hampers.webp" width="1100" height="924" loading="lazy" decoding="async"
+             alt="Four CENKO tubes wrapped in red, pink, green and blue organza bags with gold cords">
+        <figcaption>Tubes wrapped for giving, in organza and gold cord. Tell us your colours and we will match them.</figcaption>
+      </figure>
     </div>
 
-    <figure class="hamper__shot">
-      <img src="/img/g_hampers.webp" width="1100" height="924" loading="lazy" decoding="async"
-           alt="Four CENKO tins wrapped in red, pink, green and blue organza bags with gold cords">
-      <figcaption>Tins wrapped for giving, in organza and gold cord. Tell us the colours and we will match them.</figcaption>
-    </figure>
+    <ol class="hamper__steps">
+      <li><i>01</i><b>Pick what goes in</b><span>Tubes, racks, boxed sets and hundred-packs, mixed however you like.</span></li>
+      <li><i>02</i><b>We send a quote</b><span>A price per hamper below shop prices, usually within one working day.</span></li>
+      <li><i>03</i><b>We wrap and ship</b><span>Organza and gold cord or a gift box, your card on the band, delivered anywhere in India.</span></li>
+    </ol>
 
-    <div class="hamper__grid">
-      <ul class="hamper__notes">
-        <li><b>From 25 pieces.</b> Below that, the shop prices are already the best we can do.</li>
-        <li><b>Mix anything.</b> Tins, racks, boxed sets and hundred-packs in one hamper.</li>
-        <li><b>Your card inside.</b> We print a note or your logo on the band at no extra cost over 100 pieces.</li>
-        <li><b>Lead time.</b> Ten to fourteen days for a made-up hamper, less if you take stock sets as they are.</li>
-      </ul>
-
-      <div class="hamper__form">
-        <div class="hrow">
-          <label class="hfield"><span>Your name</span><input type="text" id="hqName" autocomplete="name" placeholder="Name"></label>
-          <label class="hfield"><span>Company <i>(optional)</i></span><input type="text" id="hqOrg" autocomplete="organization" placeholder="Company"></label>
-        </div>
-        <div class="hrow">
-          <label class="hfield"><span>Email</span><input type="email" id="hqEmail" autocomplete="email" placeholder="you@example.com"></label>
-          <label class="hfield"><span>Phone <i>(optional)</i></span><input type="tel" id="hqPhone" autocomplete="tel" placeholder="+91"></label>
-        </div>
-        <div class="hrow">
-          <label class="hfield"><span>How many hampers</span><input type="number" id="hqQty" min="1" step="1" inputmode="numeric" placeholder="50"></label>
-          <label class="hfield"><span>Occasion</span>
-            <select id="hqOcc">
-              <option value="">Choose one</option>
-              <option>Diwali / festive</option>
-              <option>Corporate gifting</option>
-              <option>Wedding favours</option>
-              <option>Client or employee hampers</option>
-              <option>Retail / wholesale</option>
-              <option>Something else</option>
-            </select>
-          </label>
-        </div>
-        <label class="hfield hfield--full"><span>What would you like inside?</span>
-          <textarea id="hqWhat" rows="3" placeholder="e.g. one Taj Mahal set, one Tranquility tin and a hundred-pack of lavender per hamper, in a box with our card"></textarea>
-        </label>
-        <div class="hamper__actions">
-          <button class="btn" type="button" id="hqMail"><span>Send as email</span></button>
-          <button class="btn btn--ghost" type="button" id="hqWa"><span>Ask on WhatsApp</span></button>
-        </div>
-        <p class="hamper__msg" id="hqMsg" role="status" aria-live="polite"></p>
-        <p class="hamper__fine">Goes straight to <a id="hqAddr" href="#help" data-doc="contact">our inbox</a>. We usually reply the same working day.</p>
+    <div class="hamper__build" id="hamperBuild">
+      <div class="hb__pick">
+        <h3>What goes in one hamper</h3>
+        <p class="hb__hint">Tap + to add things. Prices shown are shop prices; your bulk quote comes in below them.</p>
+        <div class="hb__group"><h4>Tubes <span>40 sticks, four fragrances</span></h4><ul class="hb__grid" id="hbTIN"></ul></div>
+        <div class="hb__group"><h4>Gift sets <span>racks and boxed sets</span></h4><ul class="hb__grid" id="hbSET"></ul></div>
+        <div class="hb__group"><h4>Hundred-packs <span>100 sticks, one fragrance</span></h4><ul class="hb__grid" id="hb100s"></ul></div>
       </div>
+
+      <aside class="hb__sum" aria-label="Your hamper and enquiry">
+        <div class="hb__card">
+          <h3>Your hamper</h3>
+          <ul class="hb__list" id="hbList" aria-live="polite"></ul>
+          <div class="hb__line"><span>Each hamper, at shop prices</span><b id="hbEach">&#8377;0</b></div>
+
+          <div class="hb__field">
+            <span class="hb__label" id="hqQtyL">How many hampers</span>
+            <div class="hb__qty">
+              <input type="number" id="hqQty" min="1" step="1" inputmode="numeric" placeholder="50" aria-labelledby="hqQtyL">
+              <div class="hb__chips" role="group" aria-label="Quick amounts">
+                <button type="button" data-hbq="25">25</button><button type="button" data-hbq="50">50</button><button type="button" data-hbq="100">100</button><button type="button" data-hbq="250">250</button>
+              </div>
+            </div>
+          </div>
+          <div class="hb__line hb__line--total"><span>All hampers, at shop prices</span><b id="hbTotal">&#8377;0</b></div>
+          <p class="hb__note" id="hbNote">Bulk pricing starts at 25 hampers.</p>
+
+          <fieldset class="hb__field">
+            <legend class="hb__label">Wrapping</legend>
+            <div class="hb__opts">
+              <label><input type="radio" name="hqWrap" value="Organza bag and gold cord" checked><span>Organza &amp; gold cord</span></label>
+              <label><input type="radio" name="hqWrap" value="Gift box"><span>Gift box</span></label>
+              <label><input type="radio" name="hqWrap" value="Leave it to CENKO"><span>Leave it to you</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="hb__field">
+            <legend class="hb__label">Occasion</legend>
+            <div class="hb__opts">
+              <label><input type="radio" name="hqOcc" value="Diwali / festive"><span>Diwali</span></label>
+              <label><input type="radio" name="hqOcc" value="Corporate gifting"><span>Corporate</span></label>
+              <label><input type="radio" name="hqOcc" value="Wedding favours"><span>Wedding</span></label>
+              <label><input type="radio" name="hqOcc" value="Client or employee hampers"><span>Clients &amp; teams</span></label>
+              <label><input type="radio" name="hqOcc" value="Retail / wholesale"><span>Retail</span></label>
+              <label><input type="radio" name="hqOcc" value="Something else"><span>Something else</span></label>
+            </div>
+          </fieldset>
+          <label class="hb__check"><input type="checkbox" id="hqCard"><span>Add a printed card or our logo on the band <i>(free over 100 pieces)</i></span></label>
+        </div>
+
+        <div class="hb__card hb__card--form">
+          <div class="hrow">
+            <label class="hfield"><span>Your name</span><input type="text" id="hqName" autocomplete="name" placeholder="Name"></label>
+            <label class="hfield"><span>Company <i>(optional)</i></span><input type="text" id="hqOrg" autocomplete="organization" placeholder="Company"></label>
+          </div>
+          <div class="hrow">
+            <label class="hfield"><span>Email</span><input type="email" id="hqEmail" autocomplete="email" placeholder="you@example.com"></label>
+            <label class="hfield"><span>Phone <i>(optional)</i></span><input type="tel" id="hqPhone" autocomplete="tel" placeholder="+91"></label>
+          </div>
+          <label class="hfield"><span>Anything else <i>(optional)</i></span>
+            <textarea id="hqWhat" rows="2" placeholder="Colours, the date you need them by, a message for the card"></textarea>
+          </label>
+          <div class="hamper__actions">
+            <button class="btn btn--paper" type="button" id="hqMail"><span>Send as email</span></button>
+            <button class="btn btn--ghost" type="button" id="hqWa"><span>Ask on WhatsApp</span></button>
+          </div>
+          <p class="hamper__msg" id="hqMsg" role="status" aria-live="polite"></p>
+          <p class="hamper__fine">Goes straight to <a id="hqAddr" href="#help" data-doc="contact">our inbox</a> from your own email or WhatsApp. We reply to every enquiry, usually the same working day.</p>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -1020,6 +1140,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   </div>
 </div>
 
-<script src="/app.js?v=56908d4385"></script>
+<script src="/app.js?v=e21daddd52"></script>
 </body>
 </html>
