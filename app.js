@@ -14,7 +14,7 @@ const SHOPIFY={
   handles:{             // site product id -> product URL handle in Shopify
     exotica:'exotica', nature:'nature', tranquility:'tranquility', rejuvenation:'rejuvenation',
     spice:'the-spice-rack', coffee:'the-coffee-rack', taj:'the-taj-mahal', ghats:'ghats-of-varanasi',
-    jasmine:'jasmine-100', rose:'rose-100', lavender:'lavender-100', musk:'musk-100', lemongrass:'lemongrass-100', citronella:'citronella-100'
+    rose:'rose-100', lavender:'lavender-100', musk:'musk-100', lemongrass:'lemongrass-100', citronella:'citronella-100'
   },
   /* Customer accounts (Shopify Customer Account API, public client set up in Headless > Customer Account API) */
   account:{
@@ -32,16 +32,16 @@ const SELLER={
   brand:'CENKO',
   legalName:'CENKO',
   address:'Mesa School of Business, Arekere Main Road, Venugopal Reddy Layout, Arekere, 3rd Floor, Bengaluru, Karnataka 560076, India',
-  email:'vasugoelop@gmail.com',
+  email:'info@cenko.in',
   phone:'+91 92050 01808',
-  grievance:{name:'CENKO Customer Care',designation:'',email:'vasugoelop@gmail.com',phone:'+91 92050 01808'},
+  grievance:{name:'CENKO Customer Care',designation:'',email:'info@cenko.in',phone:'+91 92050 01808'},
   gstin:'',           /* add your GSTIN here once registered; it will appear in the footer and policies */
   manufacturer:'',    /* name and address of the manufacturer/packer, if different from the seller */
   origin:'India',
   delivery:'3–7 days after dispatch',
   updated:'29 September 2026'
 };
-const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_jasmine": "/img/p_jasmine.webp", "p_citronella": "/img/p_citronella.webp", "p_lemongrass": "/img/p_lemongrass.webp", "p_rose": "/img/p_rose.webp", "p_musk": "/img/p_musk.webp", "p_lavender": "/img/p_lavender.webp", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp", "t_rejuvenation": "/img/t_rejuvenation.webp", "t_nature": "/img/t_nature.webp", "t_tranquility": "/img/t_tranquility.webp"};
+const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=2", "p_lemongrass": "/img/p_lemongrass.webp?v=2", "p_rose": "/img/p_rose.webp?v=2", "p_musk": "/img/p_musk.webp?v=2", "p_lavender": "/img/p_lavender.webp?v=2", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp", "t_rejuvenation": "/img/t_rejuvenation.webp", "t_nature": "/img/t_nature.webp", "t_tranquility": "/img/t_tranquility.webp"};
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(pointer: fine)').matches;
 const LITE = document.documentElement.classList.contains('lite');
@@ -138,9 +138,6 @@ const SETS=[
 ];
 const PACK_BOX=[['Sticks','100'],['Fragrance','Just the one'],['Pack','Clear sealed sleeve']];
 const PACKS=[
-  {id:'jasmine',name:'Jasmine',img:'p_jasmine',mrp:300,price:210,kind:'100s',s:'#D3A23F',
-   alt:'A sealed pack of one hundred golden jasmine incense sticks',
-   spec:'100 sticks \u00b7 one fragrance',desc:'Full, sweet and floral. The one that fills a whole floor.',best:'Living rooms and prayer corners.'},
   {id:'rose',name:'Rose',img:'p_rose',mrp:300,price:210,kind:'100s',s:'#C0395F',
    alt:'A sealed pack of one hundred pink rose incense sticks',
    spec:'100 sticks \u00b7 one fragrance',desc:'Soft, velvety rose, like petals warmed in the sun.',best:'Bedrooms and puja corners.'},
@@ -168,7 +165,7 @@ const WHY=[
   ['Swiss oils','Fragrance oils imported from Switzerland go into every blend.'],
   ['Ready to give','Sets arrive boxed and finished: a present, not a refill.']
 ];
-const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [820, 578], "p_jasmine": [820, 572], "p_lemongrass": [820, 505], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [660, 403], "p_rose": [660, 417], "p_lavender": [660, 466]};
+const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [560, 1359], "p_lemongrass": [560, 1348], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [560, 1378], "p_rose": [560, 1330], "p_lavender": [560, 1331], "g_hampers": [1100, 924]};
 const fmt=n=>'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:2});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -360,6 +357,7 @@ function light(withSound){
   body.classList.add('is-lit'); smoke.flash=1;
   Sound.hissStop(); if(withSound) Sound.whenReady(()=>Sound.bowl(174.6,.32,10));
   gate.tabIndex=-1; gate.setAttribute('aria-hidden','true'); $('.gate-sound').tabIndex=-1;
+  setTimeout(scheduleJoin,0); /* light() can run during evaluation (page restored mid-scroll) */
 }
 addEventListener('scroll',()=>{ if(!lit&&scrollY>40) light(Sound.on&&Sound.unlocked); },{passive:true});
 if(scrollY>40) light(false);
@@ -866,6 +864,7 @@ $$('[data-bag-open]').forEach(b=>b.addEventListener('click',openBag));
 $$('[data-bag-close]').forEach(b=>b.addEventListener('click',closeBag));
 addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
+  if(joinEl&&joinEl.classList.contains('open')){ joinClose(true); return; }
   if(sheetId){ closeSheet(); return; }
   if(body.classList.contains('bag-open')){ closeBag(); return; }
   if(sheetId) closeSheet();
@@ -1075,6 +1074,99 @@ function subscribe(){
 }
 $('#subBtn').addEventListener('click',subscribe);
 $('#email').addEventListener('keydown',e=>{ if(e.key==='Enter') subscribe(); });
+
+/* ============ gifting: bulk and hamper enquiries ============
+   No form endpoint to keep: the enquiry is composed here and handed to the
+   customer's own mail app or WhatsApp, so nothing is stored on our side. */
+const hq={};
+['Name','Org','Email','Phone','Qty','Occ','What','Msg','Addr','Mail','Wa'].forEach(k=>{ hq[k.toLowerCase()]=$('#hq'+k); });
+if(hq.addr){ hq.addr.textContent=SELLER.email; hq.addr.href='mailto:'+SELLER.email; hq.addr.removeAttribute('data-doc'); }
+function hqBad(el,on){ const f=el&&el.closest('.hfield'); if(f) f.classList.toggle('is-bad',!!on); }
+function hqRead(){
+  const v=el=>el?el.value.trim():'';
+  return {name:v(hq.name),org:v(hq.org),email:v(hq.email),phone:v(hq.phone),qty:v(hq.qty),occ:v(hq.occ),what:v(hq.what)};
+}
+/* both routes need enough to reply to and enough to quote on */
+function hqCheck(d){
+  [hq.name,hq.email,hq.qty,hq.what].forEach(el=>hqBad(el,false));
+  if(!d.name){ hqBad(hq.name,1); return {el:hq.name,msg:'Tell us your name so we know who we are quoting.'}; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)){ hqBad(hq.email,1); return {el:hq.email,msg:'Enter an email address like name@example.com.'}; }
+  const n=parseInt(d.qty,10);
+  if(!n||n<1){ hqBad(hq.qty,1); return {el:hq.qty,msg:'Roughly how many hampers do you need?'}; }
+  if(n<25){ hqBad(hq.qty,1); return {el:hq.qty,msg:'Bulk pricing starts at 25. For fewer, the shop prices above are already better.'}; }
+  if(d.what.length<6){ hqBad(hq.what,1); return {el:hq.what,msg:'A line on what goes inside helps us quote properly.'}; }
+  return null;
+}
+function hqBody(d){
+  return [
+    'Bulk / hamper enquiry from cenko.in','',
+    'Name: '+d.name,
+    d.org?'Company: '+d.org:'',
+    'Email: '+d.email,
+    d.phone?'Phone: '+d.phone:'',
+    'Hampers: '+d.qty,
+    d.occ?'Occasion: '+d.occ:'',
+    '','What they would like inside:',d.what,''
+  ].filter(Boolean).join('\n');
+}
+function hqSend(via){
+  const d=hqRead(), bad=hqCheck(d);
+  if(bad){ hq.msg.textContent=bad.msg; hq.msg.classList.add('err'); if(bad.el) bad.el.focus(); return; }
+  hq.msg.classList.remove('err');
+  const subject=`Bulk enquiry — ${d.qty} hampers${d.occ?' — '+d.occ:''}`, body=hqBody(d);
+  if(via==='wa'){
+    const num=SELLER.phone.replace(/[^0-9]/g,'');
+    hq.msg.textContent='Opening WhatsApp…';
+    open('https://wa.me/'+num+'?text='+encodeURIComponent(body),'_blank','noopener');
+  }else{
+    hq.msg.textContent='Opening your email app…';
+    location.href='mailto:'+SELLER.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  }
+  setTimeout(()=>{ hq.msg.textContent='Sent from your own email or WhatsApp — we reply to every one.'; },2600);
+}
+if(hq.mail) hq.mail.addEventListener('click',()=>hqSend('mail'));
+if(hq.wa) hq.wa.addEventListener('click',()=>hqSend('wa'));
+
+/* ============ member offer: one invitation, once the hero has finished lighting ============ */
+const JOIN_KEY='cenko.join', JOIN_AGAIN=45*864e5; /* if they dismiss it, do not ask again for 45 days */
+const joinEl=$('#join'); let joinFocus=null, joinTO=0, joinShown=false;
+function joinClose(remember){
+  if(!joinEl||!joinEl.classList.contains('open')) return;
+  joinEl.classList.remove('open'); joinEl.inert=true; joinEl.setAttribute('aria-hidden','true');
+  if(!body.classList.contains('bag-open')&&!sheetId) behind.forEach(x=>x.inert=false);
+  if(remember!==false) store.set(JOIN_KEY,{at:Date.now()});
+  if(joinFocus&&joinFocus.focus) joinFocus.focus({preventScroll:true});
+  joinFocus=null;
+}
+function joinOpen(){
+  if(!joinEl||joinShown||signedIn()||sheetId||body.classList.contains('bag-open')) return;
+  joinShown=true; joinFocus=document.activeElement;
+  joinEl.inert=false; joinEl.setAttribute('aria-hidden','false'); joinEl.classList.add('open');
+  behind.forEach(x=>x.inert=true);
+  setTimeout(()=>{ const b=$('.join__x',joinEl); if(b) b.focus({preventScroll:true}); },80);
+}
+/* called from light(); deferred so it never runs before the account config is evaluated */
+function scheduleJoin(){
+  if(joinTO||joinShown) return;
+  joinTO=setTimeout(()=>{
+    if(!ACC_ON||signedIn()) return;
+    const seen=store.get(JOIN_KEY);
+    if(seen&&seen.at&&Date.now()-seen.at<JOIN_AGAIN) return;
+    joinOpen();
+  },RM?1200:4200);
+}
+if(joinEl){
+  joinEl.addEventListener('click',e=>{ if(e.target.closest('[data-join-close]')) joinClose(true); });
+  /* keep tabbing inside the card while it is open */
+  joinEl.addEventListener('keydown',e=>{
+    if(e.key!=='Tab') return;
+    const f=$$('button,[href],input,select,textarea',joinEl).filter(el=>!el.disabled&&el.offsetParent!==null);
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
+}
 
 renderAccountBits();
 if(ACC_ON){
