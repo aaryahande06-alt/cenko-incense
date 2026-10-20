@@ -597,7 +597,7 @@ const DOCS={
     <h3>Orders</h3>
     <p>An order is accepted when we send your order confirmation. We may decline or cancel an order, for example if stock runs out or we suspect fraud. If we do, we refund you in full.</p>
     <h3>Members</h3>
-    <p>Customers who create a free CENKO account and are signed in at checkout get 10% off their order. We may change or end this offer, but changes never affect orders already placed.</p>
+    <p>Customers who create a free CENKO account get 10% off one order, applied at checkout while they are signed in. The member discount can be used once per customer. We may change or end this offer, but changes never affect orders already placed.</p>
     <h3>Burn safely</h3>
     <ul><li>Never leave burning incense unattended.</li><li>Burn it in a heat-proof holder, away from curtains, paper and anything flammable.</li><li>Keep it out of reach of children and pets.</li><li>Use it in a well-ventilated room.</li><li>It is not for eating or for use on skin.</li></ul>
     <h3>Liability</h3>
@@ -972,7 +972,7 @@ async function accCallback(){
     Account.state='idle';
     if(pk.subscribe) await subscribeMember();
     linkCartToMember();
-    toast(Account.me&&Account.me.first?`Welcome, ${Account.me.first}. Member pricing is on.`:'You are signed in. Member pricing is on.');
+    toast(Account.me&&Account.me.first?`Welcome, ${Account.me.first}. Your one-time 10% applies at checkout.`:'You are signed in. Your one-time 10% applies at checkout.');
   }catch(e){ console.error('[CENKO] account',e); Account.state='error'; Account.error=e.message==='signed-out'?'Sign-in expired. Please try again.':e.message; }
   renderAccountBits(); if(sheetId==='account') openAccount();
   return true;
@@ -1017,8 +1017,8 @@ function accountHTML(){
   if(signedIn()){
     const me=Account.me, o=Account.orders;
     return head+`<p class="doc__meta">${me?esc(me.email):'Signed in'}</p>
-      <span class="acct__badge">Member · 10% off every order</span>
-      <p style="margin-top:16px">${me&&me.first?`Hello ${esc(me.first)}. `:''}Your member discount is applied automatically at checkout while you are signed in.</p>
+      <span class="acct__badge">Member · 10% off one order</span>
+      <p style="margin-top:16px">${me&&me.first?`Hello ${esc(me.first)}. `:''}Your one-time 10% member discount is applied automatically at checkout while you are signed in, until you have used it.</p>
       <h3>Your orders</h3>
       ${o==null?`<p>Loading your orders…</p>`:o.length?`<ul class="acct__orders">${o.map(orderHTML).join('')}</ul>`:`<p>No orders yet. Your orders will appear here as soon as you place them.</p>`}
       <div class="acct__row"><a href="${ACC_HOME}/orders" target="_blank" rel="noopener">All orders</a><a href="${ACC_HOME}/profile" target="_blank" rel="noopener">Addresses and profile</a><button type="button" class="linkish" data-acc-logout>Sign out</button></div>
@@ -1026,7 +1026,7 @@ function accountHTML(){
   }
   return head+`<p class="doc__meta">Free to join. No password.</p>
     ${Account.state==='error'?`<p class="letter__msg err" style="color:#b3401a">${esc(Account.error)}</p>`:''}
-    <ul class="acct__perks"><li>10% off every order while you are signed in</li><li>See your previous orders and track deliveries</li><li>Faster checkout with saved addresses</li></ul>
+    <ul class="acct__perks"><li>10% off your first order as a member</li><li>See your previous orders and track deliveries</li><li>Faster checkout with saved addresses</li></ul>
     <form class="acct__form" data-acc-form novalidate>
       <label class="sr" for="accEmail">Email address</label>
       <input id="accEmail" type="email" inputmode="email" autocomplete="email" placeholder="Your email address" value="${esc(($('#email')&&$('#email').value)||'')}">
@@ -1047,7 +1047,7 @@ function renderAccountBits(){
   const on=signedIn(), name=Account.me&&Account.me.first;
   $$('.acct-t').forEach(e=>e.textContent=on?(name||'Member'):'Account');
   const bm=$('#bagMember');
-  if(bm) bm.innerHTML=on?'<b>Member pricing on:</b> 10% off is applied at checkout.':'Members save 10% at checkout. <button type="button" class="linkish" data-account-open>Sign in or join</button>';
+  if(bm) bm.innerHTML=on?'<b>Member discount:</b> your one-time 10% is applied at checkout if you have not used it yet.':'Members get 10% off their first order. <button type="button" class="linkish" data-account-open>Sign in or join</button>';
 }
 document.addEventListener('click',e=>{
   const a=e.target.closest('[data-account-open]');
