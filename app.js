@@ -41,7 +41,7 @@ const SELLER={
   delivery:'3–7 days after dispatch',
   updated:'29 September 2026'
 };
-const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=3", "p_lemongrass": "/img/p_lemongrass.webp?v=3", "p_rose": "/img/p_rose.webp?v=3", "p_musk": "/img/p_musk.webp?v=3", "p_lavender": "/img/p_lavender.webp?v=3", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp?v=3", "t_rejuvenation": "/img/t_rejuvenation.webp?v=3", "t_nature": "/img/t_nature.webp?v=3", "t_tranquility": "/img/t_tranquility.webp?v=3"};
+const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=4", "p_lemongrass": "/img/p_lemongrass.webp?v=4", "p_rose": "/img/p_rose.webp?v=4", "p_musk": "/img/p_musk.webp?v=4", "p_lavender": "/img/p_lavender.webp?v=4", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp?v=4", "t_rejuvenation": "/img/t_rejuvenation.webp?v=4", "t_nature": "/img/t_nature.webp?v=4", "t_tranquility": "/img/t_tranquility.webp?v=4"};
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(pointer: fine)').matches;
 const LITE = document.documentElement.classList.contains('lite');
@@ -85,27 +85,27 @@ const noise3=(()=>{
 /* ============ content ============ */
 const COLL=[
   {id:'exotica',name:'Exotica',sub:'faraway lands',label:'#D6402A',tint:'#E8D5CC',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_exotica',
-   alt:'The Exotica tube, wrapped in a red organza bag tied with gold cord',
+   alt:'The Exotica tube: a brushed metal cylinder with a black lid and a red hexagon-print label',
    desc:'Warm and resinous. Cedar and amber for long evenings, softened by lilac and lotus.',
    best:'Long evenings, and rooms that need warming up.',
    notes:[['Cedar','#9A6B47'],['Lilac','#8A5A7C'],['Lotus','#C8587A'],['Amber Oriental','#B0492F']]},
   {id:'nature',name:'Nature',sub:'green and open',label:'#56A23A',tint:'#D9E2CF',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_nature',
-   alt:'The Nature tube, wrapped in a green organza bag tied with gold cord',
+   alt:'The Nature tube: a brushed metal cylinder with a black lid and a green label edged in violet',
    desc:'Green and airy. Eucalyptus and patchouli, with violet and a little vanilla for sweetness.',
    best:'Afternoons with the windows open.',
    notes:[['Violet','#7F5A80'],['Vanilla','#D9A865'],['Eucalyptus','#6E8A48'],['White Patchouli','#8FA35E']]},
   {id:'tranquility',name:'Tranquility',sub:'the quiet one',label:'#DE356E',tint:'#EDD6DE',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_tranquility',
-   alt:'The Tranquility tube, wrapped in a pink organza bag tied with gold cord',
+   alt:'The Tranquility tube: a brushed metal cylinder with a black lid and a pink label edged in teal',
    desc:'Sandalwood and myrrh, lifted by rose and jasmine. The one people buy again.',
    best:'Winding down at the end of the day.',
    notes:[['Rose','#C94C6D'],['Myrrh','#3C7176'],['Jasmine','#D3A23F'],['Sandalwood','#9A6C4E']]},
   {id:'rejuvenation',name:'Rejuvenation',sub:'for mornings',label:'#4A8ED1',tint:'#D3DEE9',on:'#fff',mrp:300,price:210,kind:'TIN',img:'t_rejuvenation',
-   alt:'The Rejuvenation tube, wrapped in a blue organza bag tied with gold cord',
+   alt:'The Rejuvenation tube: a brushed metal cylinder with a black lid and a blue label edged in red',
    desc:'Bright and clean. Peppermint and sea air for mornings that need waking.',
    best:'Mornings, and a desk you need to think at.',
    notes:[['Energy','#C54B3B'],['Sea Shore','#3A7580'],['Blue Angel','#56687A'],['Peppermint','#8C9C4A']]}
 ];
-COLL.forEach(c=>c.box=[['Sticks','40 \u2014 ten of each'],['Fragrances','4 in one tube'],['Holder','Wooden ash catcher'],['Tube','Metal, with a lid'],['Wrap','Organza bag and gold cord']]);
+COLL.forEach(c=>c.box=[['Sticks','40 \u2014 ten of each'],['Fragrances','4 in one tube'],['Holder','Wooden ash catcher'],['Tube','Metal, with a lid']]);
 const SETS=[
   {id:'spice',name:'The Spice Rack',img:'r_spice',mrp:500,price:350,kind:'SET',
    alt:'The Spice Rack gift set: three corked glass vials of incense in a wooden rack, with a hand-painted soapstone holder',
@@ -165,7 +165,7 @@ const WHY=[
   ['Swiss oils','Fragrance oils imported from Switzerland go into every blend.'],
   ['Ready to give','Sets arrive boxed and finished: a present, not a refill.']
 ];
-const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [500, 1219], "p_lemongrass": [500, 1273], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [281, 1000], "t_rejuvenation": [247, 1000], "t_nature": [216, 1000], "t_tranquility": [333, 1000], "p_musk": [500, 1285], "p_rose": [500, 1311], "p_lavender": [500, 1268], "g_hampers": [1100, 924]};
+const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [560, 1359], "p_lemongrass": [560, 1348], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [560, 1378], "p_rose": [560, 1330], "p_lavender": [560, 1331], "g_hampers": [1100, 924]};
 const fmt=n=>'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:2});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
