@@ -319,7 +319,7 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
 /* ---------- member offer dialog ---------- */
 .join{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
 .join.open{opacity:1;visibility:visible;transition:opacity .5s}
-.join__veil{position:absolute;inset:0;background:rgba(6,5,4,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.join__veil{position:absolute;inset:0;background:rgba(6,5,4,.74)} /* no backdrop blur: blurring the live page behind it halved the frame rate */
 .join__card{position:relative;width:min(470px,100%);max-height:calc(100vh - 40px);overflow:auto;padding:clamp(30px,4.4vw,44px);background:#14110F;color:var(--paper);border:1px solid rgba(233,231,227,.14);box-shadow:0 40px 90px rgba(0,0,0,.5);transform:translateY(14px) scale(.985);transition:transform .55s cubic-bezier(.215,.61,.355,1)}
 .join.open .join__card{transform:none}
 .join__x{position:absolute;top:10px;right:12px;width:40px;height:40px;font-size:24px;line-height:1;color:rgba(233,231,227,.55)}
@@ -618,7 +618,7 @@ body.sheet-open .sheet__panel{transform:none;visibility:visible;transition:trans
   .nav__menu i{display:block;width:20px;height:1.5px;background:currentColor;transition:transform .4s var(--ease)}
   .nav-open .nav__menu i:first-of-type{transform:translateY(3.25px) rotate(45deg)}
   .nav-open .nav__menu i:last-of-type{transform:translateY(-3.25px) rotate(-45deg)}
-  .nav .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:6px var(--pad) 18px;background:rgba(20,16,13,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid rgba(233,231,227,.12);font:400 22px/1.2 var(--serif);opacity:0;transform:translateY(-6px);pointer-events:none;visibility:hidden;transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s linear .35s}
+  .nav .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:6px var(--pad) 18px;background:rgba(20,16,13,.97);border-bottom:1px solid rgba(233,231,227,.12);font:400 22px/1.2 var(--serif);opacity:0;transform:translateY(-6px);pointer-events:none;visibility:hidden;transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s linear .35s}
   .nav-open .nav .nav__links{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s}
   .nav .nav__links a{padding:13px 0;border-bottom:1px solid rgba(233,231,227,.1)}
   .nav .nav__links a::after{display:none}
@@ -734,7 +734,7 @@ html.lite .rp__art .em,html.lite .listen__glyph .em{filter:none}
 html.lite .hero__hint i::after{animation-duration:4s}
 html.lite .dawn canvas{will-change:auto}
 /* v3.2: while a panel is open, everything behind it holds still */
-body.sheet-open .eq i,body.bag-open .eq i,body.sheet-open .burn__ember,body.bag-open .burn__ember,body.sheet-open .hero__hint i::after,body.bag-open .hero__hint i::after{animation-play-state:paused}
+body.sheet-open .eq i,body.bag-open .eq i,body.join-open .eq i,body.join-open .burn__ember,body.sheet-open .burn__ember,body.bag-open .burn__ember,body.sheet-open .hero__hint i::after,body.bag-open .hero__hint i::after{animation-play-state:paused}
 /* v3.3: inside the bag and account panels use the normal mouse pointer (the custom cursor is driven by the paused animation loop) */
 body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
 .has-cursor.sheet-open,.has-cursor.bag-open{cursor:auto}
@@ -1140,6 +1140,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   </div>
 </div>
 
-<script src="/app.js?v=e21daddd52"></script>
+<script src="/app.js?v=5a755fde26"></script>
 </body>
 </html>

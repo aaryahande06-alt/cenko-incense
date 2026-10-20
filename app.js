@@ -1184,7 +1184,7 @@ const JOIN_KEY='cenko.join', JOIN_AGAIN=45*864e5; /* if they dismiss it, do not 
 const joinEl=$('#join'); let joinFocus=null, joinTO=0, joinShown=false;
 function joinClose(remember){
   if(!joinEl||!joinEl.classList.contains('open')) return;
-  joinEl.classList.remove('open'); joinEl.inert=true; joinEl.setAttribute('aria-hidden','true');
+  joinEl.classList.remove('open'); body.classList.remove('join-open'); joinEl.inert=true; joinEl.setAttribute('aria-hidden','true');
   if(!body.classList.contains('bag-open')&&!sheetId) behind.forEach(x=>x.inert=false);
   if(remember!==false) store.set(JOIN_KEY,{at:Date.now()});
   if(joinFocus&&joinFocus.focus) joinFocus.focus({preventScroll:true});
@@ -1193,7 +1193,7 @@ function joinClose(remember){
 function joinOpen(){
   if(!joinEl||joinShown||signedIn()||sheetId||body.classList.contains('bag-open')) return;
   joinShown=true; joinFocus=document.activeElement;
-  joinEl.inert=false; joinEl.setAttribute('aria-hidden','false'); joinEl.classList.add('open');
+  joinEl.inert=false; joinEl.setAttribute('aria-hidden','false'); joinEl.classList.add('open'); body.classList.add('join-open');
   behind.forEach(x=>x.inert=true);
   setTimeout(()=>{ const b=$('.join__x',joinEl); if(b) b.focus({preventScroll:true}); },80);
 }
@@ -1296,7 +1296,8 @@ try{ console.log('%cCENKO%c\nRolled thin. Burned slow.','font:20px serif;color:#
 
 /* ============ loop ============ */
 let loopPaused=false;
-new MutationObserver(()=>{ if(loopPaused&&!body.classList.contains('sheet-open')&&!body.classList.contains('bag-open')){ loopPaused=false; last=performance.now(); requestAnimationFrame(frame); } }).observe(body,{attributes:true,attributeFilter:['class']});
+const panelOpen=()=>body.classList.contains('sheet-open')||body.classList.contains('bag-open')||body.classList.contains('join-open');
+new MutationObserver(()=>{ if(loopPaused&&!panelOpen()){ loopPaused=false; last=performance.now(); requestAnimationFrame(frame); } }).observe(body,{attributes:true,attributeFilter:['class']});
 let sAcc=0, last=performance.now(), lastSY=scrollY, sVel=0, frameN=0, lastDone=-1, geoDirty=true;
 const Q={tier:MIN?2:(LITE?1:0), ema:16.7, n:0, t0:performance.now()+3500};
 function degrade(){
@@ -1306,7 +1307,7 @@ function degrade(){
 }
 function frame(now){
   const raw=now-last, dt=Math.min(raw/1000,1/24); last=now; frameN++;
-  if(body.classList.contains('sheet-open')||body.classList.contains('bag-open')){ loopPaused=true; return; } /* panel open: stop the smoke, marquee and scroll effects behind it until it closes */
+  if(panelOpen()){ loopPaused=true; return; } /* panel or member pop-up open: stop the smoke, marquee and scroll effects behind it until it closes */
   if(Q.tier<2&&now>Q.t0&&!document.hidden&&raw<250&&(smoke.visible||smoke2.visible)){ Q.ema+=(raw-Q.ema)*.05; if(++Q.n>90&&Q.ema>24) degrade(); }
   if(!lit){
     hold=clamp(hold+(holding?dt/1.5:-dt/.9));
