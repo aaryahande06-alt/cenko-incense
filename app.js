@@ -41,7 +41,7 @@ const SELLER={
   delivery:'3–7 days after dispatch',
   updated:'29 September 2026'
 };
-const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=4", "p_lemongrass": "/img/p_lemongrass.webp?v=4", "p_rose": "/img/p_rose.webp?v=4", "p_musk": "/img/p_musk.webp?v=4", "p_lavender": "/img/p_lavender.webp?v=4", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp?v=4", "t_rejuvenation": "/img/t_rejuvenation.webp?v=4", "t_nature": "/img/t_nature.webp?v=4", "t_tranquility": "/img/t_tranquility.webp?v=4"};
+const IMG = {"f_exotica": "/img/f_exotica.webp", "f_nature": "/img/f_nature.webp", "f_tranquility": "/img/f_tranquility.webp", "f_rejuvenation": "/img/f_rejuvenation.webp", "p_citronella": "/img/p_citronella.webp?v=5", "p_lemongrass": "/img/p_lemongrass.webp?v=5", "p_rose": "/img/p_rose.webp?v=5", "p_musk": "/img/p_musk.webp?v=5", "p_lavender": "/img/p_lavender.webp?v=5", "g_ghats": "/img/g_ghats.webp", "g_taj": "/img/g_taj.webp", "r_spice": "/img/r_spice.webp", "r_coffee": "/img/r_coffee.webp", "t_exotica": "/img/t_exotica.webp?v=4", "t_rejuvenation": "/img/t_rejuvenation.webp?v=4", "t_nature": "/img/t_nature.webp?v=4", "t_tranquility": "/img/t_tranquility.webp?v=4"};
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(pointer: fine)').matches;
 const LITE = document.documentElement.classList.contains('lite');
@@ -165,7 +165,7 @@ const WHY=[
   ['Swiss oils','Fragrance oils imported from Switzerland go into every blend.'],
   ['Ready to give','Sets arrive boxed and finished: a present, not a refill.']
 ];
-const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [560, 1359], "p_lemongrass": [560, 1348], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [560, 1378], "p_rose": [560, 1330], "p_lavender": [560, 1331], "g_hampers": [1100, 924]};
+const IMGW={"g_ghats": [820, 621], "g_taj": [820, 623], "p_citronella": [820, 578], "p_lemongrass": [820, 505], "r_coffee": [427, 1021], "r_spice": [411, 989], "t_exotica": [178, 964], "t_rejuvenation": [187, 1029], "t_nature": [187, 1010], "t_tranquility": [186, 1007], "p_musk": [660, 403], "p_rose": [660, 417], "p_lavender": [660, 466], "g_hampers": [1100, 924]};
 const fmt=n=>'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:2});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
