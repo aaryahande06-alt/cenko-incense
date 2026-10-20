@@ -176,8 +176,8 @@ img{display:block;max-width:100%}
 .ritual__tick{position:absolute;top:0;transform:translate(-50%,-36px);font:400 12px/1 var(--sans);letter-spacing:.1em;color:var(--paper);opacity:.58;transition:opacity .7s var(--ease),color .7s var(--ease)}
 .ritual__tick::after{content:"";position:absolute;left:50%;top:27px;width:1px;height:9px;background:currentColor}
 .ritual__tick.on{opacity:1;color:var(--glow)}
-.ritual__line::before{content:"";position:absolute;left:0;top:0;height:1px;width:calc(var(--p)*100%);background:linear-gradient(90deg,rgba(233,231,227,.05),rgba(233,231,227,.55))}
-.ritual__ember{position:absolute;top:0;left:calc(var(--p)*100%);width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px 3px var(--ember),0 0 34px 10px rgba(255,106,42,.3);transform:translate(-50%,-50%)}
+.ritual__line::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;transform-origin:0 0;transform:scaleX(var(--p));will-change:transform;background:linear-gradient(90deg,rgba(233,231,227,.05),rgba(233,231,227,.55))}
+.ritual__ember{position:absolute;top:0;left:0;will-change:transform;width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px 3px var(--ember),0 0 34px 10px rgba(255,106,42,.3);transform:translate3d(calc(var(--px,0)*1px - 50%),-50%,0)}
 
 /* ---------- collection ---------- */
 .coll{position:relative;background:var(--tint);color:var(--ink);overflow:hidden}
@@ -1140,6 +1140,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   </div>
 </div>
 
-<script src="/app.js?v=5a755fde26"></script>
+<script src="/app.js?v=7cec8edf23"></script>
 </body>
 </html>

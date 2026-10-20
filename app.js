@@ -396,6 +396,7 @@ const ticks=panels.map((el,i)=>{ const t=document.createElement('span'); t.class
 function layoutRit(){
   deskRit=innerWidth>860;
   if(deskRit){
+    ritLine._w=ritLine.offsetWidth; ritLine._p=-1;
     ritMax=Math.max(0,track.scrollWidth-innerWidth); ritScroll=Math.max(1,ritMax*.52); rit.style.height=(ritScroll+innerHeight)+'px';
     panels.forEach((el,i)=>{ const c=el.offsetLeft+el.offsetWidth/2-innerWidth/2; ticks[i]._p=clamp(c/Math.max(ritMax,1)); ticks[i].style.left=(ticks[i]._p*100).toFixed(2)+'%'; });
     const prevT=track.style.transform; track.style.transform='translate3d(0,0,0)';
@@ -409,9 +410,9 @@ function updRit(sy){
   if(deskRit){
     const p=clamp(-top/ritScroll), x=p*ritMax;
     track.style.transform=`translate3d(${(-x).toFixed(1)}px,0,0)`;
-    ritLine.style.setProperty('--p',p.toFixed(4));
-    ticks.forEach(t=>t.classList.toggle('on',p>=t._p-.025));
-    for(const el of panels){ const c=(el._c0-x)/innerWidth, v=+smooth(0,.72,1-Math.abs(c-.5)/.62).toFixed(3); if(v!==el._v){ el._v=v; el.style.setProperty('--v',v); } }
+    const pq=Math.round(p*400)/400; if(pq!==ritLine._p){ ritLine._p=pq; ritLine.style.setProperty('--p',pq); ritLine.style.setProperty('--px',(pq*(ritLine._w||0)).toFixed(1)); }
+    ticks.forEach(t=>{ const on=p>=t._p-.025; if(on!==t._on){ t._on=on; t.classList.toggle('on',on); } });
+    for(const el of panels){ const c=(el._c0-x)/innerWidth, v=Math.round(smooth(0,.72,1-Math.abs(c-.5)/.62)*24)/24; if(v!==el._v){ el._v=v; el.style.setProperty('--v',v); } }
   }
 }
 
@@ -1345,5 +1346,5 @@ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ layoutR
 addEventListener('load',measure);
 requestAnimationFrame(frame);
 /* v4: once the page is up, fetch the remaining product photos quietly so cards are ready before you scroll to them */
-addEventListener('load',()=>setTimeout(()=>{ window.__warm=1; document.querySelectorAll('img[loading="lazy"]').forEach(im=>im.loading='eager'); ['f_exotica','f_nature','f_tranquility','f_rejuvenation'].forEach(k=>{ const im=new Image(); im.decoding='async'; im.src=IMG[k]; }); },1200));
+addEventListener('load',()=>setTimeout(()=>{ window.__warm=1; const lazy=[...document.querySelectorAll('img[loading="lazy"]')]; const idle=window.requestIdleCallback||(f=>setTimeout(f,300)); (function step(){ lazy.splice(0,3).forEach(im=>im.loading='eager'); if(lazy.length) setTimeout(()=>idle(step,{timeout:900}),350); })(); ['f_exotica','f_nature','f_tranquility','f_rejuvenation'].forEach(k=>{ const im=new Image(); im.decoding='async'; im.src=IMG[k]; }); },1200));
 })();
