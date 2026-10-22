@@ -544,7 +544,7 @@ const DOCS={
     <h3>Where we deliver</h3>
     <p>We currently deliver within India only.</p>
     <h3>Shipping charges</h3>
-    <p>Shipping is ₹99 per order, and free on orders of ₹999 or more. The exact charge is always shown at checkout before you pay. There are no other fees.</p>
+    <p>Orders of ₹999 or more ship free. Below ₹999, we charge only what our courier, Delhivery, charges us to deliver your parcel, based on your state: ₹121 for Delhi and Haryana, ₹128 for Punjab, Uttarakhand, Uttar Pradesh and Rajasthan, ₹134 for Chandigarh, ₹181 for Maharashtra, Karnataka, Tamil Nadu, Telangana and West Bengal, ₹206 for most other states, ₹212 for Goa, ₹241 for the North-East, Himachal Pradesh, Jammu and Kashmir and Lakshadweep, and ₹284 for the Andaman and Nicobar Islands, Manipur and Ladakh. The exact charge is always shown at checkout before you pay. There are no other fees.</p>
     <h3>Couriers</h3>
     <p>Orders are shipped through our logistics partner, Delhivery.</p>
     <h3>Damaged in transit</h3>
@@ -821,6 +821,7 @@ function renderBag(){
     return `<li class="bag__item"><b>${esc(l.kind)}</b><span>${n}</span><button class="bag__rm" type="button" data-rm="${k}">Remove<i class="sr"> ${n}</i></button><small class="bag__line"><i class="qty"><button type="button" data-qty="${k}" data-d="-1" aria-label="One fewer ${n}">&minus;</button><output aria-live="polite">${l.qty}</output><button type="button" data-qty="${k}" data-d="1" aria-label="One more ${n}">+</button></i>&times; ${fmt(l.price)}</small></li>`; }).join('');
   if(SHOP_ON&&cart) sum=parseFloat(cart.cost.subtotalAmount.amount);
   $('#bagEmpty').hidden=count>0; $('#bagSum').textContent=fmt(sum);
+  const fr=$('#bagFree'); if(fr){ const left=Math.max(0,999-sum); fr.hidden=!count; fr.style.setProperty('--fs',Math.min(1,sum/999).toFixed(3)); fr.innerHTML=left>0?`Add <b>${fmt(Math.ceil(left))}</b> more for free shipping.<i></i>`:'<b>Free shipping</b> on this order.<i></i>'; }
   $$('[data-bag-count]').forEach(e=>e.textContent=count);
 }
 function addToBag(id){

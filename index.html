@@ -120,6 +120,12 @@ img{display:block;max-width:100%}
 .hero__cta .btn--light:hover,.hero__cta .btn--light:focus-visible{color:#000}
 .hero__lede p{font-size:14px;line-height:1.7;color:var(--paper-dim);margin-bottom:22px}
 .ulink{position:relative;display:inline-block;padding-bottom:4px;font-size:14px;letter-spacing:.04em}
+.hero__ship{display:flex;align-items:center;gap:10px;margin-top:22px;font:500 11px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--glow)}
+.hero__ship i{flex:none;width:6px;height:6px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px rgba(255,106,42,.7)}
+.bag__free{font-size:13px;line-height:1.5;padding:11px 14px;border-radius:12px;background:rgba(0,0,0,.05)}
+.bag__free b{font-weight:500}
+.bag__free i{display:block;height:3px;margin-top:9px;border-radius:3px;background:rgba(0,0,0,.08);overflow:hidden}
+.bag__free i::before{content:"";display:block;height:100%;width:calc(var(--fs,0)*100%);background:var(--ember);border-radius:3px;transition:width .5s var(--ease)}
 .ulink::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .7s var(--ease)}
 .ulink:hover::after{transform:scaleX(.3)}
 .hero__hint{position:absolute;z-index:4;right:var(--pad);bottom:clamp(28px,7vh,72px);display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.14em;color:var(--paper-dim)}
@@ -797,6 +803,7 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
       <h2>A stick should<br>take its time.</h2>
       <p>Over thirty fragrances, from sandalwood to sea shore, for every room of the house. Tubes, gift sets and hundred-packs.</p>
       <div class="hero__cta"><a class="btn btn--light" href="#gifts">Shop the range</a><a class="ulink" href="#ritual">Or walk the ritual first</a></div>
+      <span class="hero__ship"><i aria-hidden="true"></i>Free shipping on orders of ₹999 or more</span>
     </div>
     <div class="hero__hint fade-lit" aria-hidden="true"><i></i>Scroll slowly</div>
   </section>
@@ -1101,7 +1108,8 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   <p class="bag__empty" id="bagEmpty">Your bag is empty. Pick a tube, a gift set or a hundred-pack.</p>
   <div class="bag__foot">
     <p class="bag__sum"><span>Subtotal</span><span id="bagSum">₹0</span></p>
-    <p class="bag__fine">Prices are MRP, inclusive of all taxes. Shipping is ₹99, or free on orders of ₹999 or more, and is shown at checkout. <span id="bagMember">Members get 10% off their first order. <button type="button" class="linkish" data-account-open>Sign in or join</button></span></p>
+    <p class="bag__free" id="bagFree" aria-live="polite"></p>
+    <p class="bag__fine">Prices are MRP, inclusive of all taxes. Shipping is free on orders of ₹999 or more. Below that, you pay what Delhivery charges for your state, shown at checkout. <span id="bagMember">Members get 10% off their first order. <button type="button" class="linkish" data-account-open>Sign in or join</button></span></p>
     <button class="btn" type="button" id="checkout"><span>Checkout</span></button>
     <p class="bag__note">Secure checkout by Shopify. Pay by UPI, card, netbanking or wallet through Razorpay. By placing an order you agree to our <a href="#help" data-doc="terms">Terms</a> and <a href="#help" data-doc="returns">Returns policy</a>.</p>
   </div>
@@ -1137,6 +1145,6 @@ body.sheet-open .cursor,body.bag-open .cursor{opacity:0;transition:none}
   </div>
 </div>
 
-<script src="/app.js?v=d240488d3b"></script>
+<script src="/app.js?v=c6bd539a6c"></script>
 </body>
 </html>
